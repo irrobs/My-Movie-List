@@ -1,0 +1,77 @@
+/* 
+- Spacing system (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+- Font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+Design choices:
+
+------ Colors ------
+
+- Background: #212529
+- Components:  #343a40
+- Text: #adb5bd
+- Text-hover: #f76707
+
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: sans-serif;
+}
+
+body {
+  color: #adb5bd;
+  background-color: #212529;
+  height: 100vh;
+}
+
+.application__container {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  height: 100%;
+}
+
+.navigation {
+  background-color: #343a40;
+  font-size: 1.6rem;
+  padding: 1.2rem 2.4rem;
+}
+
+.logo {
+  font-size: 3.6rem;
+  color: #f76707;
+  margin-bottom: 4.8rem;
+}
+
+.navigation__container p {
+  font-size: 2.4rem;
+  margin-bottom: 1.6em;
+  color: #dee2e6;
+}
+
+.navigation__items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.icon {
+  height: 2.4rem;
+  width: 2.4rem;
+  color: inherit;
+}
+
+.navigation__item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.8rem;
+}

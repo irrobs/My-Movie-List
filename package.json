@@ -1,0 +1,16 @@
+{
+  "name": "mymovielist",
+  "version": "1.0.0",
+  "description": "Movie List application",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --dist-dir ./dist"
+  },
+  "author": "Matheus Borri",
+  "license": "ISC",
+  "dependencies": {
+    "ionicons": "^7.1.2",
+    "ionicons-npm": "^2.0.1",
+    "parcel": "^2.9.3"
+  }
+}
