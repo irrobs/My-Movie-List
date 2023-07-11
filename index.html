@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./src/css/style.css" />
 
     <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
+
+    <script type="module" defer src="src/js/controller.js"></script>
   </head>
   <body>
     <div class="application__container">
@@ -21,20 +23,22 @@
           <ul class="navigation__items">
             <li class="navigation__item">
               <ion-icon class="icon" name="bookmark-outline"></ion-icon>
-              <span>Favorites</span>
+              <span>Favoritos</span>
             </li>
             <li class="navigation__item">
               <ion-icon class="icon" name="checkmark-outline"></ion-icon>
-              <span>Watched</span>
+              <span>Assistidos</span>
             </li>
             <li class="navigation__item">
               <ion-icon class="icon" name="time-outline"></ion-icon>
-              <span>Watch Later</span>
+              <span>Assistir depois</span>
             </li>
           </ul>
         </nav>
       </aside>
-      <main class="movies__list"></main>
+      <main class="movies__list">
+        <div class="poster"></div>
+      </main>
     </div>
   </body>
 </html>
