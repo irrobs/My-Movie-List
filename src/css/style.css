@@ -29,7 +29,7 @@ html {
 
 body {
   color: #adb5bd;
-  background-color: #212529;
+  background-color: #1b1b1b;
   height: 100vh;
 }
 
@@ -39,27 +39,47 @@ body {
   height: 100%;
 }
 
+/* Navigation */
+
 .navigation {
-  background-color: #343a40;
   font-size: 1.6rem;
+
+  background-color: #131313;
+
   padding: 1.2rem 2.4rem;
+  border-right: 2px solid rgba(85, 85, 85, 0.3);
 }
 
 .logo {
-  font-size: 3.6rem;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 2.4rem 0;
+  margin-bottom: 2.4rem;
+
+  gap: 1rem;
   color: #f76707;
-  margin-bottom: 4.8rem;
+}
+
+.logo__icon {
+  width: 6.4rem;
+  height: 6.4rem;
 }
 
 .navigation__container p {
-  font-size: 2.4rem;
-  margin-bottom: 1.6em;
+  font-size: 1.8rem;
+  margin-bottom: 1.6rem;
+  padding-bottom: 1.2rem;
   color: #dee2e6;
+  border-bottom: 1px solid rgba(247, 103, 7, 0.562);
 }
 
 .navigation__items {
   display: flex;
   flex-direction: column;
+
   gap: 1.6rem;
 }
 
@@ -73,5 +93,14 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.8rem;
+
+  gap: 1.2rem;
+
+  cursor: pointer;
+
+  transition: all 0.3s;
+}
+
+.navigation__item:hover {
+  color: #f76707;
 }
