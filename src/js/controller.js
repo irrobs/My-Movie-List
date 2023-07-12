@@ -1,4 +1,4 @@
-const posterEl = document.querySelector(".poster");
+const posterEl = document.querySelector(".movie__preview");
 
 const fetchMovies = async function () {
   const res = await fetch(
@@ -12,7 +12,9 @@ const fetchMovies = async function () {
   console.log(data);
   console.log(poster);
 
-  posterEl.innerHTML = `<img src="${poster}" alt="">`;
+  const markup = `<img class='movie__poster' src="${poster}" alt="">`;
+
+  posterEl.insertAdjacentHTML("afterbegin", markup);
 };
 
 fetchMovies();

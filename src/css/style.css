@@ -104,3 +104,102 @@ body {
 .navigation__item:hover {
   color: #f76707;
 }
+
+/* Movie Card */
+
+.movies {
+  padding: 1.6rem 2.4rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 1.6rem;
+}
+
+.movie__preview {
+  height: fit-content;
+  padding-bottom: 0.8rem;
+  max-width: 17rem;
+  font-size: 1.4rem;
+  background-color: #131313;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  position: relative;
+}
+
+.btn__favorite {
+  position: absolute;
+  left: 90%;
+  transform: translate(-50%, 50%);
+
+  background: transparent;
+  border: none;
+  color: #131313;
+  transition: all 0.3s;
+}
+
+.btn__favorite:hover {
+  color: #f76707;
+}
+
+.movie__poster {
+  height: 25rem;
+  width: 17rem;
+}
+
+.movie__title {
+  padding: 0.8rem 1.2rem;
+}
+
+.movie__rating {
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  gap: 0.4rem;
+}
+
+.rating__icon {
+  color: yellow;
+  width: 2rem;
+  height: 2rem;
+}
+
+.btn__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.btn__movie {
+  border: none;
+  color: #adb5bd;
+  background-color: #131313;
+  width: 2.4rem;
+  height: 2.4rem;
+  cursor: pointer;
+
+  transition: all 0.3s;
+}
+
+.btn__movie:hover {
+  color: #f76707;
+}
+
+.btn__trailer {
+  cursor: pointer;
+  font-size: 1.2rem;
+  background-color: #131313;
+  color: #adb5bd;
+  border: 1px solid #f76707;
+  text-transform: uppercase;
+
+  margin: 0 1.2rem;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.3s;
+}
+
+.btn__trailer:hover {
+  background-color: #f76707;
+  color: #131313;
+}
