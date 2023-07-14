@@ -109,13 +109,13 @@ body {
 
 .movies {
   padding: 1.6rem 2.4rem;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  column-gap: 1.6rem;
 }
 
+.movies__popular--container {
+  display: flex;
+}
 .movie__preview {
-  height: fit-content;
+  height: 37rem;
   padding-bottom: 0.8rem;
   max-width: 17rem;
   font-size: 1.4rem;
