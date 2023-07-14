@@ -35,7 +35,7 @@ body {
 
 .application__container {
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 15fr 85fr;
   height: 100%;
 }
 
@@ -83,12 +83,6 @@ body {
   gap: 1.6rem;
 }
 
-.icon {
-  height: 2.4rem;
-  width: 2.4rem;
-  color: inherit;
-}
-
 .navigation__item {
   display: flex;
   flex-direction: row;
@@ -105,27 +99,63 @@ body {
   color: #f76707;
 }
 
-/* Movie Card */
-
 .movies {
   padding: 1.6rem 2.4rem;
 }
 
+/* Popular Movies */
+
+.movies__popular {
+  position: relative;
+}
+
 .movies__popular--container {
   display: flex;
+  justify-content: center;
+  gap: 1.6rem;
 }
+
 .movie__preview {
-  height: 37rem;
+  max-width: 20rem;
+
   padding-bottom: 0.8rem;
-  max-width: 17rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   background-color: #131313;
 
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
 
   position: relative;
+  transition: all 0.3s;
+}
+
+.movie__preview:hover {
+  transform: scale(1.1);
+}
+
+.poster__container {
+  overflow: hidden;
+}
+
+.movie__poster {
+  max-width: 100%;
+  transition: all 0.3s;
+}
+
+.movie__poster:hover {
+  transform: scale(1.1);
+}
+
+.movie__description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.btn__container {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 0.8rem;
 }
 
 .btn__favorite {
@@ -141,11 +171,7 @@ body {
 
 .btn__favorite:hover {
   color: #f76707;
-}
-
-.movie__poster {
-  height: 25rem;
-  width: 17rem;
+  cursor: pointer;
 }
 
 .movie__title {
@@ -165,7 +191,7 @@ body {
   height: 2rem;
 }
 
-.btn__container {
+.btns__add {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -187,6 +213,7 @@ body {
 }
 
 .btn__trailer {
+  grid-row: 2 / -1;
   cursor: pointer;
   font-size: 1.2rem;
   background-color: #131313;

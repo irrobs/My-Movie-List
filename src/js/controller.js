@@ -1,58 +1,36 @@
+import { MOVIE_LIST_AMOUNT } from "./config.js";
 import * as model from "./model.js";
 import popularView from "./views/popularView.js";
 
-const controlPopularMovies = async function () {
-  // Set popular moview
-  await model.fetchPopularMovies();
+const setPopularMovies = async function (page = 1) {
+  // Set popular movie
+  await model.fetchPopularMovies(page);
 
   // Render popular movies
-  popularView.render(model.state.movies.popular);
+  popularView.render(
+    model.state.popularMovies.movies.slice(0, MOVIE_LIST_AMOUNT)
+  );
+};
+
+const controlPopularPageChange = async function (page) {
+  if (page === 4) {
+    setPopularMovies(model.state.popularMovies.fetchPage + 1);
+  }
+  // Render popular movies
+  console.log(page);
+  console.log(MOVIE_LIST_AMOUNT * page);
+  popularView.render(
+    model.state.popularMovies.movies.slice(
+      MOVIE_LIST_AMOUNT * (page - 1),
+      MOVIE_LIST_AMOUNT * page
+        ? MOVIE_LIST_AMOUNT * page
+        : MOVIE_LIST_AMOUNT * page - 1
+    )
+  );
 };
 
 const init = function () {
-  controlPopularMovies();
+  setPopularMovies();
+  popularView.addHandlerNextPage(controlPopularPageChange);
 };
 init();
-
-/* const fetchMovies = async function () {
-  const search = movieSearchEl.value;
-  console.log(search);
-
-  const res = await fetch(
-    `http://www.omdbapi.com/?apikey=43699dc7&type=movie&t=${search}`
-  );
-
-  const data = await res.json();
-
-  console.log(data);
-
-  const markup = `
-  <div class="movie__preview">
-    <img src="${data.Poster}" alt="${data.Title} poster">
-    <button class="btn__favorite">
-      <ion-icon class="icon" name="bookmark-outline"></ion-icon>
-    </button>
-    <p class="movie__title">
-      ${data.Title}
-    </p>
-
-    <div class="btn__container">
-     <button class="btn__movie btn__later">
-       <ion-icon class="icon" name="checkmark-outline"></ion-icon>
-     </button>
-     <p class="movie__rating">
-       <span class="rating__value">${data.imdbRating}</span>
-       <ion-icon class="rating__icon" name="star"></ion-icon>
-     </p>
-     <button class="btn__movie btn__later">
-        <ion-icon class="icon" name="time-outline"></ion-icon>
-     </button>
-    </div>
-    <button class="btn__trailer">Trailer</button>
-  </div>`;
-
-  movieEl.insertAdjacentHTML("beforeend", markup);
-};
-
-btnSearchEl.addEventListener("click", fetchMovies);
- */
