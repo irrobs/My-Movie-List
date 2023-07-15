@@ -107,16 +107,23 @@ body {
 
 .movies__popular {
   position: relative;
+  width: 150rem;
+
+  margin: 0 auto;
 }
 
 .movies__popular--container {
+  position: relative;
   display: flex;
-  justify-content: center;
   gap: 1.6rem;
+  width: 100%;
+  overflow: hidden;
 }
 
 .movie__preview {
-  max-width: 20rem;
+  position: absolute;
+  width: 20rem;
+  flex-shrink: 0;
 
   padding-bottom: 0.8rem;
   font-size: 1.6rem;
@@ -126,11 +133,8 @@ body {
   grid-template-rows: 2fr 1fr;
 
   position: relative;
-  transition: all 0.3s;
-}
-
-.movie__preview:hover {
-  transform: scale(1.1);
+  /* transform: translateX(-1000%); */
+  transition: transform 3s;
 }
 
 .poster__container {

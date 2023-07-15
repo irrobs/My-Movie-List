@@ -12,6 +12,21 @@ class popularPaginationView {
     });
   }
 
+  addHandlerSlider(handler) {
+    this.#parentElement.addEventListener("click", function (e) {
+      const btn = e.target.closest(".btn__list");
+      if (!btn) return;
+
+      handler();
+    });
+  }
+
+  slider() {
+    document
+      .querySelectorAll(".movie__preview")
+      .forEach((movie, i) => (movie.style.transform = `translateX(-800%)`));
+  }
+
   render(data) {
     this.#data = data;
 
@@ -23,6 +38,8 @@ class popularPaginationView {
   #clear() {
     const btnNext = document.querySelector(".btn--next");
     const btnPrev = document.querySelector(".btn--prev");
+
+    if (!btnNext || !btnPrev) return;
     this.#parentElement.removeChild(btnNext);
     this.#parentElement.removeChild(btnPrev);
   }

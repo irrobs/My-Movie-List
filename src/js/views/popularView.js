@@ -5,7 +5,7 @@ class popularView {
   render(data) {
     this.#data = data;
 
-    const markup = this.#data
+    const markup = this.#data.movies
       .map((movie) => this.#generateMarkup(movie))
       .join("");
     this.#clear();
@@ -18,7 +18,7 @@ class popularView {
 
   #generateMarkup(movie) {
     return `
-    <div class="movie__preview">
+    <div class="movie__preview" >
       <div class="poster__container">
         <img class='movie__poster' src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title} poster">
       </div>
