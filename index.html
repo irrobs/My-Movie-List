@@ -38,22 +38,26 @@
         </nav>
       </aside>
       <main class="movies">
-        <input
-          class="movie__search--title"
-          type="text"
-          placeholder="Search by movie title"
-        />
-        <button class="btn__search">Search</button>
-        <div class="movies__popular">
-          <h2 class="heading__secondary">Popular</h2>
-          <button class="btn--prev btn__list">
-            <ion-icon class="icon" name="chevron-back-outline"></ion-icon>
-          </button>
-          <button class="btn--next btn__list" data-page="2">
-            <ion-icon class="icon" name="chevron-forward-outline"></ion-icon>
-          </button>
-          <div class="movies__popular--container"></div>
+        <div class="search">
+          <input
+            class="movie__search--title"
+            type="text"
+            placeholder="Search by movie title"
+          />
+          <button class="btn__search">Search</button>
         </div>
+        <section class="popular">
+          <h1 class="heading__primary">Popular</h1>
+          <div class="movies__popular">
+            <button class="btn--prev btn__list" data-page="0">
+              <ion-icon class="icon" name="chevron-back-outline"></ion-icon>
+            </button>
+            <button class="btn--next btn__list" data-page="2">
+              <ion-icon class="icon" name="chevron-forward-outline"></ion-icon>
+            </button>
+            <div class="movies__popular--container"></div>
+          </div>
+        </section>
       </main>
     </div>
   </body>

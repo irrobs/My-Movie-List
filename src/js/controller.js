@@ -1,36 +1,34 @@
 import { MOVIE_LIST_AMOUNT } from "./config.js";
 import * as model from "./model.js";
 import popularView from "./views/popularView.js";
+import popularPaginationView from "./views/popularPaginationView.js";
 
 const setPopularMovies = async function (page = 1) {
   // Set popular movie
   await model.fetchPopularMovies(page);
 
   // Render popular movies
-  popularView.render(
-    model.state.popularMovies.movies.slice(0, MOVIE_LIST_AMOUNT)
-  );
+  model.popularPageChange();
+  popularView.render(model.state.popularMovies.renderedMovies);
 };
 
 const controlPopularPageChange = async function (page) {
   if (page === 4) {
     setPopularMovies(model.state.popularMovies.fetchPage + 1);
   }
-  // Render popular movies
-  console.log(page);
-  console.log(MOVIE_LIST_AMOUNT * page);
-  popularView.render(
-    model.state.popularMovies.movies.slice(
-      MOVIE_LIST_AMOUNT * (page - 1),
-      MOVIE_LIST_AMOUNT * page
-        ? MOVIE_LIST_AMOUNT * page
-        : MOVIE_LIST_AMOUNT * page - 1
-    )
-  );
+  //Update Page
+  await model.popularPageChange(page === 4 ? 1 : page);
+
+  //Render next/prev page btns
+  popularPaginationView.render(model.state.popularMovies);
+
+  //Render popular movies
+  popularView.render(model.state.popularMovies.renderedMovies);
 };
 
 const init = function () {
   setPopularMovies();
-  popularView.addHandlerNextPage(controlPopularPageChange);
+  popularPaginationView.render(model.state.popularMovies);
+  popularPaginationView.addHandlerChangePage(controlPopularPageChange);
 };
 init();

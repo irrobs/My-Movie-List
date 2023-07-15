@@ -1,28 +1,15 @@
-import { MOVIE_LIST_AMOUNT } from "../config";
-
 class popularView {
   #parentElement = document.querySelector(".movies__popular--container");
-  #btnNext = document.querySelector(".btn--next");
   #data;
 
   render(data) {
     this.#data = data;
-    console.log(data);
 
     const markup = this.#data
       .map((movie) => this.#generateMarkup(movie))
       .join("");
     this.#clear();
     this.#parentElement.innerHTML = markup;
-  }
-
-  addHandlerNextPage(handler) {
-    this.#btnNext.addEventListener("click", function () {
-      let viewPage = +this.dataset.page;
-      handler(viewPage);
-      if (viewPage === 4) viewPage = 1;
-      this.dataset.page = viewPage + 1;
-    });
   }
 
   #clear() {
