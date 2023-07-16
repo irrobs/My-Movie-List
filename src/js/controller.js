@@ -3,8 +3,8 @@ import * as model from "./model.js";
 import popularView from "./views/popularView.js";
 import popularPaginationView from "./views/popularPaginationView.js";
 
-const controlSlider = function () {
-  popularPaginationView.slider();
+const controlSlider = function (btn) {
+  popularPaginationView.slider(btn);
 };
 
 const setPopularMovies = async function (page = 1) {

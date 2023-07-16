@@ -1,5 +1,6 @@
 class popularPaginationView {
   #parentElement = document.querySelector(".movies__popular");
+  #moviePreviewEls = document.querySelectorAll(".movie__preview");
   #data;
 
   addHandlerChangePage(handler) {
@@ -17,14 +18,21 @@ class popularPaginationView {
       const btn = e.target.closest(".btn__list");
       if (!btn) return;
 
-      handler();
+      handler(btn);
     });
   }
 
-  slider() {
+  slider(btn) {
     document
       .querySelectorAll(".movie__preview")
-      .forEach((movie, i) => (movie.style.transform = `translateX(-800%)`));
+      .forEach(
+        (movie) =>
+          (movie.style.transform = `translateX(-${
+            this.#parentElement.getBoundingClientRect().width *
+            (this.#data.viewPage - 1)
+          }px)`)
+      );
+    console.log(this.#parentElement.getBoundingClientRect().width);
   }
 
   render(data) {

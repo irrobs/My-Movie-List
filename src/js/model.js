@@ -1,5 +1,7 @@
 import { MOVIE_LIST_AMOUNT } from "./config";
 
+//TODO: Add way to fetch new page of movies from API to push into the popularMovies.movies array to allow to always keep sliding through movies.
+
 export const state = {
   popularMovies: {
     movies: [],
