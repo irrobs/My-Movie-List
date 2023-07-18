@@ -4,16 +4,23 @@ class popularView {
 
   render(data) {
     this.#data = data;
-
     const markup = this.#data.movies
       .map((movie) => this.#generateMarkup(movie))
       .join("");
     this.#clear();
-    this.#parentElement.innerHTML = markup;
+    this.#parentElement.insertAdjacentHTML("beforeend", markup);
   }
 
   #clear() {
     this.#parentElement.innerHTML = "";
+  }
+
+  update() {
+    const newMovies = this.#data.movies.slice(20 * (+this.#data.fetchPage - 1));
+    const markup = newMovies
+      .map((movie) => this.#generateMarkup(movie))
+      .join("");
+    this.#parentElement.insertAdjacentHTML("beforeend", markup);
   }
 
   #generateMarkup(movie) {

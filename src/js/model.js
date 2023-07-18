@@ -1,5 +1,3 @@
-import { MOVIE_LIST_AMOUNT } from "./config";
-
 //TODO: Add way to fetch new page of movies from API to push into the popularMovies.movies array to allow to always keep sliding through movies.
 
 export const state = {
@@ -11,17 +9,6 @@ export const state = {
   },
 };
 
-export const setRenderedPopularMovies = function (page) {
-  state.popularMovies.renderedMovies = state.popularMovies.movies.slice(
-    page === 3
-      ? MOVIE_LIST_AMOUNT * (page - 1) - 1
-      : MOVIE_LIST_AMOUNT * (page - 1),
-    MOVIE_LIST_AMOUNT * page
-      ? MOVIE_LIST_AMOUNT * page
-      : MOVIE_LIST_AMOUNT * page - 1
-  );
-};
-
 export const fetchPopularMovies = async function (page) {
   state.popularMovies.fetchPage = page;
   const res = await fetch(
@@ -29,15 +16,15 @@ export const fetchPopularMovies = async function (page) {
   );
   const data = await res.json();
 
-  state.popularMovies.movies = data.results;
+  state.popularMovies.movies.push(...data.results);
 };
 
-export const popularPageChange = async function (page = 1) {
-  if (page === 0 && state.popularMovies.fetchPage > 1) {
-    await fetchPopularMovies((state.popularMovies.fetchPage -= 1));
-    page = 3;
-  }
+export const popularPageSlider = async function (page) {
   state.popularMovies.viewPage = page;
-
-  setRenderedPopularMovies(page);
+  if (
+    state.popularMovies.viewPage !== 2 &&
+    state.popularMovies.viewPage % 2 === 0
+  ) {
+    await fetchPopularMovies(state.popularMovies.fetchPage + 1);
+  }
 };
