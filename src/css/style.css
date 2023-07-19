@@ -105,14 +105,16 @@ body {
 
 /* Popular Movies */
 
-.movies__popular {
+.movies__popular,
+.movies__top {
   position: relative;
   width: 150rem;
 
   margin: 0 auto;
 }
 
-.movies__popular--container {
+.movies__popular--container,
+.movies__top--container {
   position: relative;
   display: flex;
   gap: 1.2rem;

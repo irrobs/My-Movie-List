@@ -1,7 +1,7 @@
 import moviesView from "./moviesView.js";
 
-class popularView extends moviesView {
-  _parentElement = document.querySelector(".movies__popular--container");
+class topMoviesView extends moviesView {
+  _parentElement = document.querySelector(".movies__top--container");
 
   _generateMarkup(movie) {
     return `
@@ -40,4 +40,4 @@ class popularView extends moviesView {
   }
 }
 
-export default new popularView();
+export default new topMoviesView();

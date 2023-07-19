@@ -1,10 +1,8 @@
 import paginationView from "./paginationView";
 
-class popularPaginationView extends paginationView {
-  _parentElement = document.querySelector(".movies__popular");
-  _moviePopularContainer = document.querySelector(
-    ".movies__popular--container"
-  );
+class topPaginationView extends paginationView {
+  _parentElement = document.querySelector(".movies__top");
+  _movietopContainer = document.querySelector(".movies__top--container");
 
   addHandlerSlider(handler) {
     this._parentElement.addEventListener("click", function (e) {
@@ -16,4 +14,4 @@ class popularPaginationView extends paginationView {
   }
 }
 
-export default new popularPaginationView();
+export default new topPaginationView();
