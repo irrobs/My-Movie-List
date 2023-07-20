@@ -16,6 +16,12 @@ export const state = {
     fetchPage: 0,
     viewPage: 1,
   },
+  searchedMovies: {
+    totalPages: 0,
+    totalResults: 0,
+    movies: [],
+    fetchPage: 0,
+  },
 };
 
 // API calls
@@ -55,6 +61,19 @@ export const fetchCinemaMovies = async function (page) {
   } catch (err) {
     console.error(err);
   }
+};
+
+export const fetchSearchedMovies = async function (query, page = 1) {
+  if (!query) return;
+  state.searchedMovies.fetchPage = page;
+  const searchResults = await AJAX(
+    `https://api.themoviedb.org/3/search/movie?query=${query}&page=${state.searchedMovies.fetchPage}&language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+  );
+
+  state.searchedMovies.totalPages = searchResults.total_pages;
+  state.searchedMovies.totalResults = searchResults.total_results;
+  state.searchedMovies.movies.push(...searchResults.results);
+  console.log(state.searchedMovies);
 };
 
 // Sliders

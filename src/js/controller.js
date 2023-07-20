@@ -1,10 +1,11 @@
 import * as model from "./model.js";
-import popularView from "./views/popularView.js";
-import topMoviesView from "./views/topMoviesView.js";
-import cinemaMoviesView from "./views/cinemaMoviesView.js";
-import popularPaginationView from "./views/popularPaginationView.js";
-import topPaginationView from "./views/topPaginationView.js";
-import cinemaPaginationView from "./views/cinemaPaginationView.js";
+import popularView from "./views/moviesSliders/popularView.js";
+import topMoviesView from "./views/moviesSliders/topMoviesView.js";
+import cinemaMoviesView from "./views/moviesSliders/cinemaMoviesView.js";
+import popularPaginationView from "./views/paginationViews/popularPaginationView.js";
+import topPaginationView from "./views/paginationViews/topPaginationView.js";
+import cinemaPaginationView from "./views/paginationViews/cinemaPaginationView.js";
+import searchView from "./views/searchView.js";
 
 const setPopularMovies = async function (page = 1) {
   try {
@@ -96,6 +97,20 @@ const controlCinemaSlider = async function (btn) {
   }
 };
 
+const controlSearch = async function (query) {
+  try {
+    if (!query) return;
+    await model.fetchSearchedMovies(query);
+    if (model.state.searchedMovies.totalPages > 1) {
+      await model.fetchSearchedMovies(query, 2);
+    }
+
+    searchView.render(model.state.searchedMovies);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 const init = function () {
   setPopularMovies();
   setTopMovies();
@@ -103,5 +118,16 @@ const init = function () {
   popularPaginationView.addHandlerSlider(controlPopularSlider);
   topPaginationView.addHandlerSlider(controlTopSlider);
   cinemaPaginationView.addHandlerSlider(controlCinemaSlider);
+  searchView.addHandlerSearch(controlSearch);
 };
 init();
+
+/* const 
+
+btnSearch.addEventListener("click", async function (e) {
+  const markup = searchResults.results.map((movie) => render(movie)).join("");
+  console.log(markup);
+  moviesContainer.classList.toggle("hidden");
+  document.querySelector(".movies__searched").classList.toggle("hidden");
+  movies.innerHTML = markup;
+}); */

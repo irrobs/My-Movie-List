@@ -2,9 +2,7 @@ import paginationView from "./paginationView";
 
 class cinemaPaginationView extends paginationView {
   _parentElement = document.querySelector(".movies__cinema");
-  _movieCinemaContainer = document.querySelector(
-    ".movies__cinema--container"
-  );
+  _movieCinemaContainer = document.querySelector(".movies__cinema--container");
 
   addHandlerSlider(handler) {
     this._parentElement.addEventListener("click", function (e) {
