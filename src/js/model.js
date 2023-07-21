@@ -21,6 +21,8 @@ export const state = {
     totalResults: 0,
     movies: [],
     fetchPage: 0,
+    viewPage: 1,
+    prevQuery: "",
   },
 };
 
@@ -66,13 +68,33 @@ export const fetchCinemaMovies = async function (page) {
 export const fetchSearchedMovies = async function (query, page = 1) {
   if (!query) return;
   state.searchedMovies.fetchPage = page;
-  const searchResults = await AJAX(
-    `https://api.themoviedb.org/3/search/movie?query=${query}&page=${state.searchedMovies.fetchPage}&language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
-  );
+  const searchResults = await Promise.all([
+    AJAX(
+      `https://api.themoviedb.org/3/search/movie?query=${query}&page=${page}&language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+    ),
+    AJAX(
+      `https://api.themoviedb.org/3/search/movie?query=${query}&page=${
+        page + 1
+      }&language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+    ),
+    AJAX(
+      `https://api.themoviedb.org/3/search/movie?query=${query}&page=${
+        page + 2
+      }&language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+    ),
+  ]);
 
-  state.searchedMovies.totalPages = searchResults.total_pages;
-  state.searchedMovies.totalResults = searchResults.total_results;
-  state.searchedMovies.movies.push(...searchResults.results);
+  console.log(searchResults);
+
+  if (query === state.searchedMovies.prevQuery && page === 1) return;
+
+  searchResults.forEach((result) =>
+    state.searchedMovies.movies.push(...result.results)
+  );
+  state.searchedMovies.prevQuery = query;
+  state.searchedMovies.totalPages = searchResults[0].total_pages;
+  state.searchedMovies.totalResults = searchResults[0].total_results;
+
   console.log(state.searchedMovies);
 };
 

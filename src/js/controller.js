@@ -6,6 +6,9 @@ import popularPaginationView from "./views/paginationViews/popularPaginationView
 import topPaginationView from "./views/paginationViews/topPaginationView.js";
 import cinemaPaginationView from "./views/paginationViews/cinemaPaginationView.js";
 import searchView from "./views/searchView.js";
+import searchPagination from "./views/searchPagination.js";
+
+//TODO: SEARCH: Allow to click in button Inicio to get back to the sliders page. Fix data saving after searching for a different query, cleaning the old data and putting and rendering with the new one only. Allow pagination.
 
 const setPopularMovies = async function (page = 1) {
   try {
@@ -101,15 +104,15 @@ const controlSearch = async function (query) {
   try {
     if (!query) return;
     await model.fetchSearchedMovies(query);
-    if (model.state.searchedMovies.totalPages > 1) {
-      await model.fetchSearchedMovies(query, 2);
-    }
 
     searchView.render(model.state.searchedMovies);
+    searchPagination.render(model.state.searchedMovies);
   } catch (err) {
     console.error(err);
   }
 };
+
+const controlSearchPagination = function (btn) {};
 
 const init = function () {
   setPopularMovies();
@@ -119,6 +122,7 @@ const init = function () {
   topPaginationView.addHandlerSlider(controlTopSlider);
   cinemaPaginationView.addHandlerSlider(controlCinemaSlider);
   searchView.addHandlerSearch(controlSearch);
+  searchPagination.addHandlerPagination(controlSearchPagination);
 };
 init();
 

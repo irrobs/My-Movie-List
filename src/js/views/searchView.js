@@ -1,6 +1,7 @@
 class searchView {
   #btnSearch = document.querySelector(".btn__search");
   #moviesContainer = document.querySelector(".movies__sliders--container");
+  #searchedContainer = document.querySelector(".movies__searched");
   #movies = document.querySelector(".movies__searched--container");
   #data;
 
@@ -16,18 +17,32 @@ class searchView {
     const markup = this.#data.movies
       .map((movie) => this.#generateMarkup(movie))
       .join("");
-    this.#moviesContainer.classList.toggle("hidden");
-    document.querySelector(".movies__searched").classList.toggle("hidden");
+
+    this.#clear();
     this.#movies.insertAdjacentHTML("beforeend", markup);
+
+    if (this.#searchedContainer.classList.contains("hidden")) {
+      this.#moviesContainer.classList.toggle("hidden");
+      this.#searchedContainer.classList.toggle("hidden");
+    }
+  }
+
+  #clear() {
+    this.#movies.innerHTML = "";
+  }
+  #getMoviePoster(movie) {
+    return movie.poster_path
+      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+      : "";
   }
 
   #generateMarkup = function (movie) {
     return `
     <div class="movie__preview" >
       <div class="poster__container">
-        <img class='movie__poster' src="https://image.tmdb.org/t/p/w500${
-          movie.poster_path
-        }" alt="${movie.title} poster">
+        <img class='movie__poster' src=${this.#getMoviePoster(movie)} alt="${
+      movie.title
+    } poster">
       </div>
   
   

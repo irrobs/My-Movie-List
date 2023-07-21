@@ -43,3 +43,39 @@
 .hidden {
   display: none;
 }
+
+.icon__pag {
+  width: 1.4rem;
+  height: 1.4rem;
+  color: inherit;
+}
+
+.btn__pag {
+  background: none;
+  color: #f76707;
+  font-size: 1.4rem;
+  border: 1px solid transparent;
+  top: 100%;
+  transform: translate(-50%, -100%);
+
+  position: absolute;
+  z-index: 10;
+
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.btn__pag:hover {
+  border-bottom: 1px solid #f76707;
+}
+
+.btn__pag--next {
+  left: 60%;
+}
+
+.btn__pag--prev {
+  left: 40%;
+}
