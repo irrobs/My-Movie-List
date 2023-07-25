@@ -10,6 +10,12 @@ class searchView {
       const search = document.querySelector(".movie__search--input");
       handler(search.value);
     });
+
+    document.addEventListener("keydown", function (e) {
+      const search = document.querySelector(".movie__search--input");
+      if (!(e.key === "Enter") || !(document.activeElement === search)) return;
+      handler(search.value);
+    });
   }
 
   render(data) {

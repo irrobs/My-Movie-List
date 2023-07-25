@@ -22,7 +22,7 @@
         <nav class="navigation__container">
           <p>Menu</p>
           <ul class="navigation__items">
-            <li class="navigation__item">
+            <li class="navigation__item home">
               <ion-icon class="icon" name="home-outline"></ion-icon>
               <span>Início</span>
             </li>
@@ -48,7 +48,9 @@
             type="text"
             placeholder="Digite o nome do filme"
           />
-          <button class="btn__search">Search</button>
+          <button class="btn__search">
+            <ion-icon class="icon" name="search-outline"></ion-icon>
+          </button>
         </div>
         <section class="movies__searched hidden">
           <h1 class="heading__primary">Resultados da busca</h1>
@@ -68,7 +70,7 @@
             </div>
           </section>
           <section class="cinema">
-            <h1 class="heading__primary">Nos Cinemas</h1>
+            <h1 class="heading__primary">Recentes</h1>
             <div class="movies__cinema">
               <div class="movies__cinema--container"></div>
             </div>

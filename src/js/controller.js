@@ -1,4 +1,5 @@
 import * as model from "./model.js";
+import navigationView from "./views/navigationView.js";
 import popularView from "./views/moviesSliders/popularView.js";
 import topMoviesView from "./views/moviesSliders/topMoviesView.js";
 import cinemaMoviesView from "./views/moviesSliders/cinemaMoviesView.js";
@@ -9,8 +10,14 @@ import searchView from "./views/searchView.js";
 import searchPagination from "./views/searchPagination.js";
 
 const movies = document.querySelector(".movies");
+const moviesSearched = document.querySelector(".movies__searched");
 
-//TODO: SEARCH: Allow to click in button Inicio to get back to the sliders page.
+//TODO: SEARCH: Add focus style for input search, change display of searched movies to a grid of 6.
+
+const controlHome = function (homeContainer) {
+  homeContainer.classList.toggle("hidden");
+  moviesSearched.classList.toggle("hidden");
+};
 
 const setPopularMovies = async function (page = 1) {
   try {
@@ -135,6 +142,7 @@ const init = function () {
   setPopularMovies();
   setTopMovies();
   setCinemaMovies();
+  navigationView.addHandlerHome(controlHome);
   popularPaginationView.addHandlerSlider(controlPopularSlider);
   topPaginationView.addHandlerSlider(controlTopSlider);
   cinemaPaginationView.addHandlerSlider(controlCinemaSlider);
