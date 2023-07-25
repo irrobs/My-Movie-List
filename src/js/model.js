@@ -69,7 +69,7 @@ export const fetchSearchedMovies = async function (query, page = 1) {
   if (!query) return;
   if (
     query.toLowerCase() === state.searchedMovies.prevQuery.toLowerCase() &&
-    page === 1
+    page === 0
   )
     return;
 
@@ -93,12 +93,13 @@ export const fetchSearchedMovies = async function (query, page = 1) {
 
   console.log(searchResults);
 
-  if (query.toLowerCase() !== state.searchedMovies.prevQuery.toLowerCase())
-    state.searchedMovies.movies = [];
+  state.searchedMovies.movies = [];
 
   searchResults.forEach((result) =>
     state.searchedMovies.movies.push(...result.results)
   );
+  if (query.toLowerCase() !== state.searchedMovies.prevQuery.toLowerCase())
+    state.searchedMovies.viewPage = 1;
   state.searchedMovies.prevQuery = query;
   state.searchedMovies.totalPages = searchResults[0].total_pages;
   state.searchedMovies.totalResults = searchResults[0].total_results;
@@ -107,7 +108,7 @@ export const fetchSearchedMovies = async function (query, page = 1) {
 };
 
 export const searchPagination = function (btn) {
-  const page = btn.dataset.page;
+  const page = +btn.dataset.page;
   if (page === 0) return;
 
   state.searchedMovies.viewPage = page;

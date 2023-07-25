@@ -20,8 +20,8 @@ class searchPagination {
   }
 
   _clear() {
-    const btnNext = this._parentElement.querySelector(".btn--next");
-    const btnPrev = this._parentElement.querySelector(".btn--prev");
+    const btnNext = this._parentElement.querySelector(".btn__pag--next");
+    const btnPrev = this._parentElement.querySelector(".btn__pag--prev");
 
     if (!btnNext || !btnPrev) return;
     this._parentElement.removeChild(btnNext);
@@ -33,11 +33,11 @@ class searchPagination {
     return `
       <button class="btn__pag--prev btn__pag" data-page="${currPage - 1}">
         <ion-icon class="icon__pag" name="arrow-back-outline"></ion-icon>
-       1 página
+        ${currPage - 1} página
       </button>
       
       <button class="btn__pag--next btn__pag" data-page="${currPage + 1}">
-        página 3
+        página ${currPage + 1}
         <ion-icon class="icon__pag" name="arrow-forward-outline"></ion-icon>
       </button>
     `;

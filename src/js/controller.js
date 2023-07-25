@@ -8,7 +8,9 @@ import cinemaPaginationView from "./views/paginationViews/cinemaPaginationView.j
 import searchView from "./views/searchView.js";
 import searchPagination from "./views/searchPagination.js";
 
-//TODO: SEARCH: Allow to click in button Inicio to get back to the sliders page. Fix data saving for searched movies, render new pages if pagination.
+const movies = document.querySelector(".movies");
+
+//TODO: SEARCH: Allow to click in button Inicio to get back to the sliders page.
 
 const setPopularMovies = async function (page = 1) {
   try {
@@ -112,15 +114,21 @@ const controlSearch = async function (query) {
   }
 };
 
-const controlSearchPagination = function (btn) {
+const controlSearchPagination = async function (btn) {
   //Change viewPage in state
   model.searchPagination(btn);
 
   //Fetch new page data
-  model.fetchSearchedMovies(
+  await model.fetchSearchedMovies(
     model.state.searchedMovies.prevQuery,
     model.state.searchedMovies.viewPage
   );
+
+  // render data
+  searchView.render(model.state.searchedMovies);
+  searchPagination.render(model.state.searchedMovies);
+
+  movies.scrollTo(0, 0);
 };
 
 const init = function () {
