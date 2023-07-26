@@ -12,8 +12,6 @@ import searchPagination from "./views/searchPagination.js";
 const movies = document.querySelector(".movies");
 const moviesSearched = document.querySelector(".movies__searched");
 
-//TODO: SEARCH: Add focus style for input search, change display of searched movies to a grid of 6.
-
 const controlHome = function (homeContainer) {
   homeContainer.classList.toggle("hidden");
   moviesSearched.classList.toggle("hidden");
