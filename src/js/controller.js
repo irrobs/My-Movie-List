@@ -7,12 +7,22 @@ import popularPaginationView from "./views/paginationViews/popularPaginationView
 import topPaginationView from "./views/paginationViews/topPaginationView.js";
 import cinemaPaginationView from "./views/paginationViews/cinemaPaginationView.js";
 import searchView from "./views/searchView.js";
-import searchPagination from "./views/searchPagination.js";
+import searchPagination from "./views/paginationViews/searchPagination.js";
+import movieModalView from "./views/movieModalView.js";
+import { AJAX } from "./helpers.js";
 
-const movies = document.querySelector(".movies");
-const moviesSearched = document.querySelector(".movies__searched");
+//TODO: Modal: General html in movieModalView, style modal, add listener in btn to close modal
+const controlMovieModal = async function (movieID) {
+  const movie = await AJAX(
+    `https://api.themoviedb.org/3/movie/${movieID}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+  );
+
+  console.log(movie);
+  movieModalView.toggleModal();
+};
 
 const controlHome = function (homeContainer) {
+  const moviesSearched = document.querySelector(".movies__searched");
   homeContainer.classList.toggle("hidden");
   moviesSearched.classList.toggle("hidden");
 };
@@ -133,6 +143,7 @@ const controlSearchPagination = async function (btn) {
   searchView.render(model.state.searchedMovies);
   searchPagination.render(model.state.searchedMovies);
 
+  const movies = document.querySelector(".movies");
   movies.scrollTo(0, 0);
 };
 
@@ -146,5 +157,6 @@ const init = function () {
   cinemaPaginationView.addHandlerSlider(controlCinemaSlider);
   searchView.addHandlerSearch(controlSearch);
   searchPagination.addHandlerPagination(controlSearchPagination);
+  movieModalView.addHandlerMovieModal(controlMovieModal);
 };
 init();

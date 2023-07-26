@@ -44,7 +44,7 @@ class searchView {
 
   #generateMarkup = function (movie) {
     return `
-    <div class="movie__preview" >
+    <div class="movie__preview" data-id="${movie.id}" >
       <div class="poster__container">
         <img class='movie__poster' src=${this.#getMoviePoster(movie)} alt="${
       movie.title

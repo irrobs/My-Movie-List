@@ -293,3 +293,23 @@ body {
 .movie__search--input::placeholder {
   color: #f76707;
 }
+
+/* Movie Modal */
+.modal {
+  height: 80vh;
+  width: 80vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 100;
+  background-color: #131313;
+}
+
+.overlay {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: 99;
+  background-color: rgba(19, 19, 19, 0.7);
+}

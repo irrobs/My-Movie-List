@@ -74,7 +74,6 @@ export const fetchSearchedMovies = async function (query, page = 1) {
     return;
 
   state.searchedMovies.fetchPage = page * 2 + (page - 2);
-  console.log(state.searchedMovies.fetchPage);
   const searchResults = await Promise.all([
     AJAX(
       `https://api.themoviedb.org/3/search/movie?query=${query}&page=${state.searchedMovies.fetchPage}&language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
@@ -91,8 +90,6 @@ export const fetchSearchedMovies = async function (query, page = 1) {
     ),
   ]);
 
-  console.log(searchResults);
-
   state.searchedMovies.movies = [];
 
   searchResults.forEach((result) =>
@@ -103,8 +100,6 @@ export const fetchSearchedMovies = async function (query, page = 1) {
   state.searchedMovies.prevQuery = query;
   state.searchedMovies.totalPages = searchResults[0].total_pages;
   state.searchedMovies.totalResults = searchResults[0].total_results;
-
-  console.log(state.searchedMovies);
 };
 
 export const searchPagination = function (btn) {
