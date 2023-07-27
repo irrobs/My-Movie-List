@@ -24,9 +24,19 @@ export const state = {
     viewPage: 1,
     prevQuery: "",
   },
+  movieModal: {
+    movie: {},
+  },
 };
 
 // API calls
+export const fetchMovieByID = async function (movieID) {
+  const movie = await AJAX(
+    `https://api.themoviedb.org/3/movie/${movieID}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+  );
+
+  state.movieModal.movie = movie;
+};
 export const fetchPopularMovies = async function (page) {
   try {
     state.popularMovies.fetchPage = page;

@@ -13,11 +13,12 @@ import { AJAX } from "./helpers.js";
 
 //TODO: Modal: General html in movieModalView, style modal, add listener in btn to close modal
 const controlMovieModal = async function (movieID) {
-  const movie = await AJAX(
-    `https://api.themoviedb.org/3/movie/${movieID}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
-  );
+  await model.fetchMovieByID(movieID);
+  movieModalView.render(model.state.movieModal);
+  movieModalView.toggleModal();
+};
 
-  console.log(movie);
+const controlCloseModal = function () {
   movieModalView.toggleModal();
 };
 
@@ -158,5 +159,6 @@ const init = function () {
   searchView.addHandlerSearch(controlSearch);
   searchPagination.addHandlerPagination(controlSearchPagination);
   movieModalView.addHandlerMovieModal(controlMovieModal);
+  movieModalView.addHandlerCloseModal(controlCloseModal);
 };
 init();
