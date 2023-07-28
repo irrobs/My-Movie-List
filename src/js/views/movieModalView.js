@@ -66,7 +66,25 @@ class movieModalView {
         <ul class="movie__modal--genres">${this.#generateGenreTags(
           movie.genres
         )}</ul>
-        <p class="movie__modal--overview">${movie.overview}</p>
+        <ul class="movie__modal--listBtns navigation__items">
+            <li class="navigation__item">
+              <ion-icon class="icon" name="bookmark-outline"></ion-icon>
+              <span>Favoritos</span>
+            </li>
+            <li class="navigation__item">
+              <ion-icon class="icon" name="checkmark-outline"></ion-icon>
+              <span>Assistidos</span>
+            </li>
+            <li class="navigation__item">
+              <ion-icon class="icon" name="time-outline"></ion-icon>
+              <span>Assistir depois</span>
+            </li>
+          </ul>
+        <div class="movie__modal--overview">
+        <p>Sinopse:</p>
+        </br>
+        ${movie.overview}</div>
+        <button class="btn__trailer">Trailer</button>
         </div>
         </div>
     `;
