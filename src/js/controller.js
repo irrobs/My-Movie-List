@@ -9,9 +9,21 @@ import cinemaPaginationView from "./views/paginationViews/cinemaPaginationView.j
 import searchView from "./views/searchView.js";
 import searchPagination from "./views/paginationViews/searchPagination.js";
 import movieModalView from "./views/movieModalView.js";
-import { AJAX } from "./helpers.js";
+import favoriteView from "./views/favoriteView.js";
 
-//TODO: Modal: General html in movieModalView, style modal, add listener in btn to close modal
+const controlBookmark = function () {
+  favoriteView.render(model.state.favoriteMovies);
+};
+const controlAddToBookmark = async function (movieId) {
+  await model.addToFavorite(movieId);
+};
+const controlWatched = function () {
+  console.log("watched");
+};
+const controlLater = function () {
+  console.log("Later");
+};
+
 const controlMovieModal = async function (movieID) {
   await model.fetchMovieByID(movieID);
   movieModalView.render(model.state.movieModal);
@@ -160,5 +172,11 @@ const init = function () {
   searchPagination.addHandlerPagination(controlSearchPagination);
   movieModalView.addHandlerMovieModal(controlMovieModal);
   movieModalView.addHandlerCloseModal(controlCloseModal);
+
+  navigationView.addHandlerWatched(controlWatched);
+  navigationView.addHandlerLater(controlLater);
+
+  favoriteView.addHandlerBookmark(controlBookmark);
+  favoriteView.addHandlerAddToFavorite(controlAddToBookmark);
 };
 init();

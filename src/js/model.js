@@ -27,6 +27,35 @@ export const state = {
   movieModal: {
     movie: {},
   },
+  favoriteMovies: [],
+  watchedMovies: [],
+  laterMovies: [],
+};
+
+const setFavorite = function () {
+  if (localStorage.getItem("favoriteMovies")) {
+    JSON.parse(localStorage.getItem("favoriteMovies")).forEach((movie) =>
+      state.favoriteMovies.push(movie)
+    );
+  }
+};
+
+setFavorite();
+
+const clearStorage = function () {
+  localStorage.clear();
+};
+/* clearStorage(); */
+
+export const addToFavorite = async function (movieId) {
+  const movie = await AJAX(
+    `https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+  );
+
+  if (state.favoriteMovies.some((favMovie) => favMovie.id === movie.id)) return;
+  state.favoriteMovies.push(movie);
+  localStorage.setItem("favoriteMovies", JSON.stringify(state.favoriteMovies));
+  console.log(state.favoriteMovies);
 };
 
 // API calls

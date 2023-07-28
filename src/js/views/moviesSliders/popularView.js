@@ -12,7 +12,7 @@ class popularView extends moviesView {
 
 
       <button class="btn__favorite">
-        <ion-icon class="icon" name="bookmark-outline"></ion-icon>
+        <ion-icon class="icon icon__favorite" name="bookmark-outline"></ion-icon>
       </button>
 
 

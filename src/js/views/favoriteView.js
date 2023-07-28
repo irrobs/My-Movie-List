@@ -1,40 +1,47 @@
-class searchView {
-  #btnSearch = document.querySelector(".btn__search");
+class favoriteView {
+  #parentElement = document.querySelector(`.lists__container`);
   #moviesContainer = document.querySelector(".movies__sliders--container");
-  #searchedContainer = document.querySelector(".movies__searched");
-  #movies = document.querySelector(".movies__searched--container");
+  #applicationContainer = document.querySelector(".application__container");
+  #bookmark = document.querySelector(".bookmark");
   #data;
 
-  addHandlerSearch(handler) {
-    this.#btnSearch.addEventListener("click", function () {
-      const search = document.querySelector(".movie__search--input");
-      handler(search.value);
-    });
+  addHandlerAddToFavorite(handler) {
+    this.#applicationContainer.addEventListener("click", function (e) {
+      if (!e.target.classList.contains("icon__favorite")) return;
+      const targetMovie = e.target.closest(".movie__preview").dataset.id;
 
-    document.addEventListener("keydown", function (e) {
-      const search = document.querySelector(".movie__search--input");
-      if (!(e.key === "Enter") || !(document.activeElement === search)) return;
-      handler(search.value);
+      handler(targetMovie);
+    });
+  }
+
+  addHandlerBookmark(handler) {
+    this.#bookmark.addEventListener("click", function () {
+      const listsContainer = document.querySelector(".lists__container");
+      if (!listsContainer.classList.contains("hidden")) return;
+
+      handler(listsContainer);
     });
   }
 
   render(data) {
     this.#data = data;
-    const markup = this.#data.movies
+    console.log(this.#data);
+    const markup = this.#data
       .map((movie) => this.#generateMarkup(movie))
       .join("");
 
     this.#clear();
-    this.#movies.insertAdjacentHTML("beforeend", markup);
+    this.#parentElement.innerHTML =
+      `<h1 class="heading__primary">Favoritos</h1>` + markup;
 
-    if (this.#searchedContainer.classList.contains("hidden")) {
+    if (this.#parentElement.classList.contains("hidden")) {
       this.#moviesContainer.classList.toggle("hidden");
-      this.#searchedContainer.classList.toggle("hidden");
+      this.#parentElement.classList.toggle("hidden");
     }
   }
 
   #clear() {
-    this.#movies.innerHTML = "";
+    this.#parentElement.innerHTML = "";
   }
 
   #getMoviePoster(movie) {
@@ -45,6 +52,8 @@ class searchView {
 
   #generateMarkup = function (movie) {
     return `
+    
+
     <div class="movie__preview" data-id="${movie.id}" >
       <div class="poster__container">
         <img class='movie__poster' src=${
@@ -84,4 +93,4 @@ class searchView {
   };
 }
 
-export default new searchView();
+export default new favoriteView();
