@@ -32,6 +32,11 @@ export const state = {
   laterMovies: [],
 };
 
+const clearStorage = function () {
+  localStorage.clear();
+};
+/* clearStorage(); */
+
 const setFavorite = function () {
   if (localStorage.getItem("favoriteMovies")) {
     JSON.parse(localStorage.getItem("favoriteMovies")).forEach((movie) =>
@@ -42,11 +47,6 @@ const setFavorite = function () {
 
 setFavorite();
 
-const clearStorage = function () {
-  localStorage.clear();
-};
-/* clearStorage(); */
-
 export const addToFavorite = async function (movieId) {
   const movie = await AJAX(
     `https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
@@ -56,6 +56,27 @@ export const addToFavorite = async function (movieId) {
   state.favoriteMovies.push(movie);
   localStorage.setItem("favoriteMovies", JSON.stringify(state.favoriteMovies));
   console.log(state.favoriteMovies);
+};
+
+const setwatched = function () {
+  if (localStorage.getItem("watchedMovies")) {
+    JSON.parse(localStorage.getItem("watchedMovies")).forEach((movie) =>
+      state.watchedMovies.push(movie)
+    );
+  }
+};
+
+setwatched();
+
+export const addToWatched = async function (movieId) {
+  const movie = await AJAX(
+    `https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+  );
+
+  if (state.watchedMovies.some((favMovie) => favMovie.id === movie.id)) return;
+  state.watchedMovies.push(movie);
+  localStorage.setItem("watchedMovies", JSON.stringify(state.watchedMovies));
+  console.log(state.watchedMovies);
 };
 
 // API calls

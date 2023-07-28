@@ -1,14 +1,14 @@
-class favoriteView {
+class watchedView {
   #parentElement = document.querySelector(`.lists__container`);
   #moviesContainer = document.querySelector(".movies__sliders--container");
   #moviesSearched = document.querySelector(".movies__searched");
   #applicationContainer = document.querySelector(".application__container");
-  #bookmark = document.querySelector(".bookmark");
+  #watched = document.querySelector(".watched");
   #data;
 
-  addHandlerAddToFavorite(handler) {
+  addHandlerAddToWatched(handler) {
     this.#applicationContainer.addEventListener("click", function (e) {
-      if (!e.target.classList.contains("icon__favorite")) return;
+      if (!e.target.classList.contains("icon__watched")) return;
       if (document.querySelector(".modal").classList.contains("hidden")) {
         const targetMovie = e.target.closest(".movie__preview").dataset.id;
 
@@ -17,8 +17,8 @@ class favoriteView {
     });
   }
 
-  addHandlerBookmark(handler) {
-    this.#bookmark.addEventListener("click", function () {
+  addHandlerWatched(handler) {
+    this.#watched.addEventListener("click", function () {
       const listsContainer = document.querySelector(".lists__container");
       if (!listsContainer.classList.contains("hidden")) return;
 
@@ -96,4 +96,4 @@ class favoriteView {
   };
 }
 
-export default new favoriteView();
+export default new watchedView();

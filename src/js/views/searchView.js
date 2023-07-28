@@ -2,6 +2,7 @@ class searchView {
   #btnSearch = document.querySelector(".btn__search");
   #moviesContainer = document.querySelector(".movies__sliders--container");
   #searchedContainer = document.querySelector(".movies__searched");
+  #moviesLists = document.querySelector(".lists__container");
   #movies = document.querySelector(".movies__searched--container");
   #data;
 
@@ -28,7 +29,8 @@ class searchView {
     this.#movies.insertAdjacentHTML("beforeend", markup);
 
     if (this.#searchedContainer.classList.contains("hidden")) {
-      this.#moviesContainer.classList.toggle("hidden");
+      this.#moviesContainer.classList.add("hidden");
+      this.#moviesLists.classList.add("hidden");
       this.#searchedContainer.classList.toggle("hidden");
     }
   }
@@ -56,7 +58,7 @@ class searchView {
   
   
       <button class="btn__favorite">
-        <ion-icon class="icon" name="bookmark-outline"></ion-icon>
+        <ion-icon class="icon icon__favorite" name="bookmark-outline"></ion-icon>
       </button>
   
   
@@ -66,8 +68,8 @@ class searchView {
         </p>
         <div class="btn__container">
           <div class='btns__add'>
-         <button class="btn__movie btn__later">
-           <ion-icon class="icon" name="checkmark-outline"></ion-icon>
+         <button class="btn__movie btn__watched">
+           <ion-icon class="icon icon__watched" name="checkmark-outline"></ion-icon>
          </button>
           <p class="movie__rating">
            <span class="rating__value">${movie.vote_average.toFixed(1)}</span>

@@ -40,7 +40,7 @@ class movieModalView {
       <button class="btn__close">
           <ion-icon class="icon btn__close--icon" name="close-outline"></ion-icon>
         </button>
-        <div class="movie__modal--container">
+        <div class="movie__modal--container" data-id="${movie.id}">
         <div class="movie__modal--poster">
         <img
           src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
@@ -68,7 +68,7 @@ class movieModalView {
         )}</ul>
         <ul class="movie__modal--listBtns navigation__items">
             <li class="navigation__item">
-              <ion-icon class="icon" name="bookmark-outline"></ion-icon>
+              <ion-icon class="icon icon__favorite" name="bookmark-outline"></ion-icon>
               <span>Favoritos</span>
             </li>
             <li class="navigation__item">

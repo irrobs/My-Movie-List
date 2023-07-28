@@ -12,7 +12,7 @@ class cinemaMoviesView extends moviesView {
 
 
       <button class="btn__favorite">
-        <ion-icon class="icon" name="bookmark-outline"></ion-icon>
+        <ion-icon class="icon icon__favorite" name="bookmark-outline"></ion-icon>
       </button>
 
 
@@ -22,8 +22,8 @@ class cinemaMoviesView extends moviesView {
         </p>
         <div class="btn__container">
           <div class='btns__add'>
-         <button class="btn__movie btn__later">
-           <ion-icon class="icon" name="checkmark-outline"></ion-icon>
+         <button class="btn__movie btn__watched">
+           <ion-icon class="icon icon__watched" name="checkmark-outline"></ion-icon>
          </button>
           <p class="movie__rating">
            <span class="rating__value">${movie.vote_average}</span>
