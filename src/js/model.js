@@ -32,10 +32,11 @@ export const state = {
   laterMovies: [],
 };
 
-const clearStorage = function () {
+//Uso para desenvolvimento
+/* const clearStorage = function () {
   localStorage.clear();
 };
-/* clearStorage(); */
+clearStorage();*/
 
 const setFavorite = function () {
   if (localStorage.getItem("favoriteMovies")) {
@@ -48,14 +49,22 @@ const setFavorite = function () {
 setFavorite();
 
 export const addToFavorite = async function (movieId) {
-  const movie = await AJAX(
-    `https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
-  );
+  try {
+    const movie = await AJAX(
+      `https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+    );
 
-  if (state.favoriteMovies.some((favMovie) => favMovie.id === movie.id)) return;
-  state.favoriteMovies.push(movie);
-  localStorage.setItem("favoriteMovies", JSON.stringify(state.favoriteMovies));
-  console.log(state.favoriteMovies);
+    if (state.favoriteMovies.some((favMovie) => favMovie.id === movie.id))
+      return;
+    state.favoriteMovies.push(movie);
+    localStorage.setItem(
+      "favoriteMovies",
+      JSON.stringify(state.favoriteMovies)
+    );
+    console.log(state.favoriteMovies);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const setLater = function () {
@@ -69,15 +78,18 @@ const setLater = function () {
 setLater();
 
 export const addToLater = async function (movieId) {
-  const movie = await AJAX(
-    `https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
-  );
+  try {
+    const movie = await AJAX(
+      `https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+    );
 
-  if (state.laterMovies.some((laterMovie) => laterMovie.id === movie.id))
-    return;
-  state.laterMovies.push(movie);
-  localStorage.setItem("laterMovies", JSON.stringify(state.laterMovies));
-  console.log(state.laterMovies);
+    if (state.laterMovies.some((laterMovie) => laterMovie.id === movie.id))
+      return;
+    state.laterMovies.push(movie);
+    localStorage.setItem("laterMovies", JSON.stringify(state.laterMovies));
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const setwatched = function () {
@@ -91,24 +103,33 @@ const setwatched = function () {
 setwatched();
 
 export const addToWatched = async function (movieId) {
-  const movie = await AJAX(
-    `https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
-  );
+  try {
+    const movie = await AJAX(
+      `https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+    );
 
-  if (state.watchedMovies.some((watchedMovie) => watchedMovie.id === movie.id))
-    return;
-  state.watchedMovies.push(movie);
-  localStorage.setItem("watchedMovies", JSON.stringify(state.watchedMovies));
-  console.log(state.watchedMovies);
+    if (
+      state.watchedMovies.some((watchedMovie) => watchedMovie.id === movie.id)
+    )
+      return;
+    state.watchedMovies.push(movie);
+    localStorage.setItem("watchedMovies", JSON.stringify(state.watchedMovies));
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 // API calls
 export const fetchMovieByID = async function (movieID) {
-  const movie = await AJAX(
-    `https://api.themoviedb.org/3/movie/${movieID}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
-  );
+  try {
+    const movie = await AJAX(
+      `https://api.themoviedb.org/3/movie/${movieID}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+    );
 
-  state.movieModal.movie = movie;
+    state.movieModal.movie = movie;
+  } catch (err) {
+    console.error(err);
+  }
 };
 export const fetchPopularMovies = async function (page) {
   try {
@@ -135,6 +156,7 @@ export const fetchTopMovies = async function (page) {
     console.error(err);
   }
 };
+
 export const fetchCinemaMovies = async function (page) {
   try {
     state.cinemaMovies.fetchPage = page;
@@ -149,40 +171,44 @@ export const fetchCinemaMovies = async function (page) {
 };
 
 export const fetchSearchedMovies = async function (query, page = 1) {
-  if (!query) return;
-  if (
-    query.toLowerCase() === state.searchedMovies.prevQuery.toLowerCase() &&
-    page === 0
-  )
-    return;
+  try {
+    if (!query) return;
+    if (
+      query.toLowerCase() === state.searchedMovies.prevQuery.toLowerCase() &&
+      page === 0
+    )
+      return;
 
-  state.searchedMovies.fetchPage = page * 2 + (page - 2);
-  const searchResults = await Promise.all([
-    AJAX(
-      `https://api.themoviedb.org/3/search/movie?query=${query}&page=${state.searchedMovies.fetchPage}&language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
-    ),
-    AJAX(
-      `https://api.themoviedb.org/3/search/movie?query=${query}&page=${
-        state.searchedMovies.fetchPage + 1
-      }&language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
-    ),
-    AJAX(
-      `https://api.themoviedb.org/3/search/movie?query=${query}&page=${
-        state.searchedMovies.fetchPage + 2
-      }&language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
-    ),
-  ]);
+    state.searchedMovies.fetchPage = page * 2 + (page - 2);
+    const searchResults = await Promise.all([
+      AJAX(
+        `https://api.themoviedb.org/3/search/movie?query=${query}&page=${state.searchedMovies.fetchPage}&language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+      ),
+      AJAX(
+        `https://api.themoviedb.org/3/search/movie?query=${query}&page=${
+          state.searchedMovies.fetchPage + 1
+        }&language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+      ),
+      AJAX(
+        `https://api.themoviedb.org/3/search/movie?query=${query}&page=${
+          state.searchedMovies.fetchPage + 2
+        }&language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+      ),
+    ]);
 
-  state.searchedMovies.movies = [];
+    state.searchedMovies.movies = [];
 
-  searchResults.forEach((result) =>
-    state.searchedMovies.movies.push(...result.results)
-  );
-  if (query.toLowerCase() !== state.searchedMovies.prevQuery.toLowerCase())
-    state.searchedMovies.viewPage = 1;
-  state.searchedMovies.prevQuery = query;
-  state.searchedMovies.totalPages = searchResults[0].total_pages;
-  state.searchedMovies.totalResults = searchResults[0].total_results;
+    searchResults.forEach((result) =>
+      state.searchedMovies.movies.push(...result.results)
+    );
+    if (query.toLowerCase() !== state.searchedMovies.prevQuery.toLowerCase())
+      state.searchedMovies.viewPage = 1;
+    state.searchedMovies.prevQuery = query;
+    state.searchedMovies.totalPages = searchResults[0].total_pages;
+    state.searchedMovies.totalResults = searchResults[0].total_results;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export const searchPagination = function (btn) {

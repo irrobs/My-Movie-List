@@ -12,6 +12,20 @@ class movieModalView {
     });
   }
 
+  #getId() {
+    return this.#data.movie.dataset.id;
+  }
+
+  addHandlerAddToLists(handler) {
+    this.#modal.addEventListener("click", function (e) {
+      const btn = e.target.closest(".navigation__item");
+      if (!btn) return;
+
+      const id = e.target.closest(".movie__modal--container").dataset.id;
+      handler(btn, id);
+    });
+  }
+
   addHandlerCloseModal(handler) {
     this.#modal.addEventListener("click", function (e) {
       if (!e.target.classList.contains("btn__close--icon")) return;
@@ -67,15 +81,15 @@ class movieModalView {
           movie.genres
         )}</ul>
         <ul class="movie__modal--listBtns navigation__items">
-            <li class="navigation__item">
+            <li class="navigation__item item__favorite">
               <ion-icon class="icon icon__favorite" name="bookmark-outline"></ion-icon>
               <span>Favoritos</span>
             </li>
-            <li class="navigation__item">
+            <li class="navigation__item item__watched">
               <ion-icon class="icon" name="checkmark-outline"></ion-icon>
               <span>Assistidos</span>
             </li>
-            <li class="navigation__item">
+            <li class="navigation__item item__later">
               <ion-icon class="icon" name="time-outline"></ion-icon>
               <span>Assistir depois</span>
             </li>

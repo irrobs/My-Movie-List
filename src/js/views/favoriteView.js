@@ -27,7 +27,6 @@ class favoriteView {
 
   render(data) {
     this.#data = data;
-    console.log(this.#data);
     const markup = this.#data
       .map((movie) => this.#generateMarkup(movie))
       .join("");

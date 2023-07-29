@@ -13,33 +13,60 @@ import favoriteView from "./views/favoriteView.js";
 import watchedView from "./views/watchedView.js";
 import laterView from "./views/laterView.js";
 
-const controlBookmark = function (container) {
-  container.innerHTML = "";
-  favoriteView.render(model.state.favoriteMovies);
-};
-const controlAddToBookmark = async function (movieId) {
-  await model.addToFavorite(movieId);
+const controlAddToLists = function (btn, movieId) {
+  if (btn.classList.contains("item__favorite")) {
+    controlAddToBookmark(movieId);
+  }
+  if (btn.classList.contains("item__watched")) {
+    controlAddToWatched(movieId);
+  }
+  if (btn.classList.contains("item__later")) {
+    controlAddToLater(movieId);
+  }
 };
 
-const controlWatched = function (container) {
+const controlBookmark = function () {
+  favoriteView.render(model.state.favoriteMovies);
+};
+
+const controlAddToBookmark = async function (movieId) {
+  try {
+    await model.addToFavorite(movieId);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const controlWatched = function () {
   watchedView.render(model.state.watchedMovies);
 };
 const controlAddToWatched = async function (movieId) {
-  await model.addToWatched(movieId);
+  try {
+    await model.addToWatched(movieId);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-const controlLater = function (container) {
-  container.innerHTML = "";
+const controlLater = function () {
   laterView.render(model.state.laterMovies);
 };
 const controlAddToLater = async function (movieId) {
-  await model.addToLater(movieId);
+  try {
+    await model.addToLater(movieId);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const controlMovieModal = async function (movieID) {
-  await model.fetchMovieByID(movieID);
-  movieModalView.render(model.state.movieModal);
-  movieModalView.toggleModal();
+  try {
+    await model.fetchMovieByID(movieID);
+    movieModalView.render(model.state.movieModal);
+    movieModalView.toggleModal();
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const controlCloseModal = function () {
@@ -71,23 +98,31 @@ const setPopularMovies = async function (page = 1) {
 };
 
 const setTopMovies = async function (page = 1) {
-  // Top movies
-  await model.fetchTopMovies(page);
-  await model.fetchTopMovies(page + 1);
+  try {
+    // Top movies
+    await model.fetchTopMovies(page);
+    await model.fetchTopMovies(page + 1);
 
-  // Render top movies
-  topMoviesView.render(model.state.topMovies);
-  topPaginationView.render(model.state.topMovies);
+    // Render top movies
+    topMoviesView.render(model.state.topMovies);
+    topPaginationView.render(model.state.topMovies);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const setCinemaMovies = async function (page = 1) {
-  // cinema movies
-  await model.fetchCinemaMovies(page);
-  await model.fetchCinemaMovies(page + 1);
+  try {
+    // cinema movies
+    await model.fetchCinemaMovies(page);
+    await model.fetchCinemaMovies(page + 1);
 
-  // Render cinema movies
-  cinemaMoviesView.render(model.state.cinemaMovies);
-  cinemaPaginationView.render(model.state.cinemaMovies);
+    // Render cinema movies
+    cinemaMoviesView.render(model.state.cinemaMovies);
+    cinemaPaginationView.render(model.state.cinemaMovies);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const controlPopularSlider = async function (btn) {
@@ -157,21 +192,25 @@ const controlSearch = async function (query) {
 };
 
 const controlSearchPagination = async function (btn) {
-  //Change viewPage in state
-  model.searchPagination(btn);
+  try {
+    //Change viewPage in state
+    model.searchPagination(btn);
 
-  //Fetch new page data
-  await model.fetchSearchedMovies(
-    model.state.searchedMovies.prevQuery,
-    model.state.searchedMovies.viewPage
-  );
+    //Fetch new page data
+    await model.fetchSearchedMovies(
+      model.state.searchedMovies.prevQuery,
+      model.state.searchedMovies.viewPage
+    );
 
-  // render data
-  searchView.render(model.state.searchedMovies);
-  searchPagination.render(model.state.searchedMovies);
+    // render data
+    searchView.render(model.state.searchedMovies);
+    searchPagination.render(model.state.searchedMovies);
 
-  const movies = document.querySelector(".movies");
-  movies.scrollTo(0, 0);
+    const movies = document.querySelector(".movies");
+    movies.scrollTo(0, 0);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const init = function () {
@@ -186,6 +225,7 @@ const init = function () {
   searchPagination.addHandlerPagination(controlSearchPagination);
   movieModalView.addHandlerMovieModal(controlMovieModal);
   movieModalView.addHandlerCloseModal(controlCloseModal);
+  movieModalView.addHandlerAddToLists(controlAddToLists);
 
   navigationView.addHandlerLater(controlLater);
 
