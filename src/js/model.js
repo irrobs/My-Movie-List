@@ -58,6 +58,28 @@ export const addToFavorite = async function (movieId) {
   console.log(state.favoriteMovies);
 };
 
+const setLater = function () {
+  if (localStorage.getItem("laterMovies")) {
+    JSON.parse(localStorage.getItem("laterMovies")).forEach((movie) =>
+      state.laterMovies.push(movie)
+    );
+  }
+};
+
+setLater();
+
+export const addToLater = async function (movieId) {
+  const movie = await AJAX(
+    `https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+  );
+
+  if (state.laterMovies.some((laterMovie) => laterMovie.id === movie.id))
+    return;
+  state.laterMovies.push(movie);
+  localStorage.setItem("laterMovies", JSON.stringify(state.laterMovies));
+  console.log(state.laterMovies);
+};
+
 const setwatched = function () {
   if (localStorage.getItem("watchedMovies")) {
     JSON.parse(localStorage.getItem("watchedMovies")).forEach((movie) =>
@@ -73,7 +95,8 @@ export const addToWatched = async function (movieId) {
     `https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
   );
 
-  if (state.watchedMovies.some((favMovie) => favMovie.id === movie.id)) return;
+  if (state.watchedMovies.some((watchedMovie) => watchedMovie.id === movie.id))
+    return;
   state.watchedMovies.push(movie);
   localStorage.setItem("watchedMovies", JSON.stringify(state.watchedMovies));
   console.log(state.watchedMovies);

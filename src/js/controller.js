@@ -11,22 +11,29 @@ import searchPagination from "./views/paginationViews/searchPagination.js";
 import movieModalView from "./views/movieModalView.js";
 import favoriteView from "./views/favoriteView.js";
 import watchedView from "./views/watchedView.js";
+import laterView from "./views/laterView.js";
 
-const controlBookmark = function () {
+const controlBookmark = function (container) {
+  container.innerHTML = "";
   favoriteView.render(model.state.favoriteMovies);
 };
 const controlAddToBookmark = async function (movieId) {
   await model.addToFavorite(movieId);
 };
-const controlWatched = function () {
+
+const controlWatched = function (container) {
   watchedView.render(model.state.watchedMovies);
 };
 const controlAddToWatched = async function (movieId) {
   await model.addToWatched(movieId);
 };
 
-const controlLater = function () {
-  console.log("Later");
+const controlLater = function (container) {
+  container.innerHTML = "";
+  laterView.render(model.state.laterMovies);
+};
+const controlAddToLater = async function (movieId) {
+  await model.addToLater(movieId);
 };
 
 const controlMovieModal = async function (movieID) {
@@ -180,7 +187,6 @@ const init = function () {
   movieModalView.addHandlerMovieModal(controlMovieModal);
   movieModalView.addHandlerCloseModal(controlCloseModal);
 
-  navigationView.addHandlerWatched(controlWatched);
   navigationView.addHandlerLater(controlLater);
 
   favoriteView.addHandlerBookmark(controlBookmark);
@@ -188,5 +194,8 @@ const init = function () {
 
   watchedView.addHandlerWatched(controlWatched);
   watchedView.addHandlerAddToWatched(controlAddToWatched);
+
+  laterView.addHandlerLater(controlLater);
+  laterView.addHandlerAddTolater(controlAddToLater);
 };
 init();

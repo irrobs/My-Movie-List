@@ -30,7 +30,7 @@ class topMoviesView extends moviesView {
            <ion-icon class="rating__icon" name="star"></ion-icon>
           </p>
          <button class="btn__movie btn__later">
-            <ion-icon class="icon" name="time-outline"></ion-icon>
+            <ion-icon class="icon icon__later" name="time-outline"></ion-icon>
          </button>
          </div>
          <button class="btn__trailer">Trailer</button>

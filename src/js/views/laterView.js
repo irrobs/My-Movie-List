@@ -1,14 +1,14 @@
-class watchedView {
+class laterView {
   #parentElement = document.querySelector(`.lists__container`);
   #moviesContainer = document.querySelector(".movies__sliders--container");
   #moviesSearched = document.querySelector(".movies__searched");
   #applicationContainer = document.querySelector(".application__container");
-  #watched = document.querySelector(".watched");
+  #later = document.querySelector(".later");
   #data;
 
-  addHandlerAddToWatched(handler) {
+  addHandlerAddTolater(handler) {
     this.#applicationContainer.addEventListener("click", function (e) {
-      if (!e.target.classList.contains("icon__watched")) return;
+      if (!e.target.classList.contains("icon__later")) return;
       if (document.querySelector(".modal").classList.contains("hidden")) {
         const targetMovie = e.target.closest(".movie__preview").dataset.id;
 
@@ -17,8 +17,8 @@ class watchedView {
     });
   }
 
-  addHandlerWatched(handler) {
-    this.#watched.addEventListener("click", function () {
+  addHandlerLater(handler) {
+    this.#later.addEventListener("click", function () {
       const listsContainer = document.querySelector(".lists__container");
 
       handler(listsContainer);
@@ -33,7 +33,7 @@ class watchedView {
       .join("");
 
     this.#clear();
-    this.#parentElement.innerHTML = `<h1 class="heading__primary">Assistidos</h1><div class='lists__description--container' >${markup}</div>`;
+    this.#parentElement.innerHTML = `<h1 class="heading__primary">Assistir depois</h1><div class='lists__description--container' >${markup}</div>`;
 
     if (this.#parentElement.classList.contains("hidden")) {
       this.#moviesContainer.classList.add("hidden");
@@ -67,7 +67,7 @@ class watchedView {
   
   
       <button class="btn__favorite">
-        <ion-icon class="icon icon__favorite" name="bookmark-outline"></ion-icon>
+        <ion-icon class="icon" name="bookmark-outline"></ion-icon>
       </button>
   
   
@@ -77,15 +77,15 @@ class watchedView {
         </p>
         <div class="btn__container">
           <div class='btns__add'>
-         <button class="btn__movie btn__watched">
-           <ion-icon class="icon icon__watched" name="checkmark-outline"></ion-icon>
+         <button class="btn__movie btn__later">
+           <ion-icon class="icon" name="checkmark-outline"></ion-icon>
          </button>
           <p class="movie__rating">
            <span class="rating__value">${movie.vote_average.toFixed(1)}</span>
            <ion-icon class="rating__icon" name="star"></ion-icon>
           </p>
          <button class="btn__movie btn__later">
-            <ion-icon class="icon icon__later" name="time-outline"></ion-icon>
+            <ion-icon class="icon" name="time-outline"></ion-icon>
          </button>
          </div>
          <button class="btn__trailer">Trailer</button>
@@ -95,4 +95,4 @@ class watchedView {
   };
 }
 
-export default new watchedView();
+export default new laterView();

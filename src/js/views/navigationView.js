@@ -1,6 +1,5 @@
 class navigationView {
   #home = document.querySelector(".home");
-
   #watched = document.querySelector(".watched");
   #later = document.querySelector(".later");
 
@@ -15,19 +14,12 @@ class navigationView {
     });
   }
 
-  addHandlerWatched(handler) {
-    this.#watched.addEventListener("click", function () {
-      const listsContainer = document.querySelector(".lists__container");
-      if (!listsContainer.classList.contains("hidden")) return;
-
-      handler(listsContainer);
-    });
-  }
   addHandlerLater(handler) {
     this.#later.addEventListener("click", function () {
       const listsContainer = document.querySelector(".lists__container");
       if (!listsContainer.classList.contains("hidden")) return;
 
+      listsContainer.innerHTML = ''
       handler(listsContainer);
     });
   }
