@@ -30,6 +30,7 @@ export const state = {
   favoriteMovies: [],
   watchedMovies: [],
   laterMovies: [],
+  movieTrailer: "",
 };
 
 //Uso para desenvolvimento
@@ -37,6 +38,41 @@ export const state = {
   localStorage.clear();
 };
 clearStorage();*/
+
+export const getTrailerData = async function (movieId) {
+  const trailerData = await AJAX(
+    `https://api.themoviedb.org/3/movie/${movieId}/videos?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+  );
+
+  const trailerKeyDub1 = trailerData.results.find((trailer) => {
+    if (trailer.name.toLowerCase().includes("trailer oficial [dub"))
+      return trailer;
+  })?.key;
+  const trailerKeyDub2 = trailerData.results.find((trailer) => {
+    if (trailer.name.toLowerCase().includes("trailer oficial dub"))
+      return trailer;
+  })?.key;
+
+  const trailerKeyLeg1 = trailerData.results.find((trailer) => {
+    if (trailer.name.toLowerCase().includes("trailer oficial [leg"))
+      return trailer;
+  })?.key;
+  const trailerKeyLeg2 = trailerData.results.find((trailer) => {
+    if (trailer.name.toLowerCase().includes("trailer oficial legendado"))
+      return trailer;
+  })?.key;
+  const trailerGeneric = trailerData.results.find((trailer) => {
+    if (trailer.name.toLowerCase().includes("trailer")) return trailer;
+  })?.key;
+
+  state.movieTrailer = `https://www.youtube.com/watch?v=${
+    trailerKeyDub1 ||
+    trailerKeyDub2 ||
+    trailerKeyLeg1 ||
+    trailerKeyLeg2 ||
+    trailerGeneric
+  }`;
+};
 
 const setFavorite = function () {
   if (localStorage.getItem("favoriteMovies")) {

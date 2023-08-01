@@ -13,6 +13,65 @@ import favoriteView from "./views/favoriteView.js";
 import watchedView from "./views/watchedView.js";
 import laterView from "./views/laterView.js";
 
+const controlTrailerPopular = async function (movieId) {
+  await model.getTrailerData(movieId);
+
+  console.log(model.state.movieTrailer);
+  popularView.renderModal(model.state.movieTrailer);
+};
+const controlTrailerTop = async function (movieId) {
+  await model.getTrailerData(movieId);
+
+  topView.renderModal(model.state.movieTrailer);
+};
+const controlTrailerCine = async function (movieId) {
+  await model.getTrailerData(movieId);
+
+  cinemaMoviesView.renderModal(model.state.movieTrailer);
+};
+
+/* document
+  .querySelector(".application__container")
+  .addEventListener("click", async function (e) {
+    if (!e.target.classList.contains("btn__trailer")) return;
+    const movieId = e.target.closest(".movie__preview").dataset.id;
+    const trailerData = await AJAX(
+      `https://api.themoviedb.org/3/movie/${movieId}/videos?language=pt-BR&api_key=175417d18069c0e4b048ceb3ba6d229b`
+    );
+    console.log(trailerData.results);
+
+    const trailerKeyDub1 = trailerData.results.find((trailer) => {
+      if (trailer.name.toLowerCase().includes("trailer oficial [dub"))
+        return trailer;
+    })?.key;
+    const trailerKeyDub2 = trailerData.results.find((trailer) => {
+      if (trailer.name.toLowerCase().includes("trailer oficial dub"))
+        return trailer;
+    })?.key;
+
+    const trailerKeyLeg1 = trailerData.results.find((trailer) => {
+      if (trailer.name.toLowerCase().includes("trailer oficial [leg"))
+        return trailer;
+    })?.key;
+    const trailerKeyLeg2 = trailerData.results.find((trailer) => {
+      if (trailer.name.toLowerCase().includes("trailer oficial legendado"))
+        return trailer;
+    })?.key;
+    const trailerGeneric = trailerData.results.find((trailer) => {
+      if (trailer.name.toLowerCase().includes("trailer")) return trailer;
+    })?.key;
+
+    const trailerLink = `https://www.youtube.com/watch?v=${
+      trailerKeyDub1 ||
+      trailerKeyDub2 ||
+      trailerKeyLeg1 ||
+      trailerKeyLeg2 ||
+      trailerGeneric
+    }`;
+
+    this.innerHTML = `<a href="${trailerLink}">Trailer</a>`;
+  }); */
+
 const controlAddToLists = function (btn, movieId) {
   if (btn.classList.contains("item__favorite")) {
     controlAddToBookmark(movieId);
@@ -217,6 +276,11 @@ const init = function () {
   setPopularMovies();
   setTopMovies();
   setCinemaMovies();
+
+  popularView.addHandlerTrailer(controlTrailerPopular);
+  topMoviesView.addHandlerTrailer(controlTrailerTop);
+  cinemaMoviesView.addHandlerTrailer(controlTrailerCine);
+
   navigationView.addHandlerHome(controlHome);
   popularPaginationView.addHandlerSlider(controlPopularSlider);
   topPaginationView.addHandlerSlider(controlTopSlider);
