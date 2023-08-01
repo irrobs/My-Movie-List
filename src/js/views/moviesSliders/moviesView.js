@@ -1,6 +1,6 @@
 export default class moviesView {
   _parentElement = document.querySelector(".application__container");
-  _modal = document.querySelector(".modal");
+  _modal = document.querySelector(".modal__trailer");
   _overlay = document.querySelector(".overlay");
   _data;
 
@@ -13,18 +13,25 @@ export default class moviesView {
     });
   }
 
-  closeModal() {
+  addHandlerCloseModal(handler) {
     this._modal.addEventListener("click", function (e) {
       if (!e.target.classList.contains("btn__close--icon")) return;
-      toggleModal();
+      handler();
     });
   }
 
   renderModal(data) {
     this._clearModal();
-    this._modal.innerHTML = `<button class="btn__close">
-    <ion-icon class="icon btn__close--icon" name="close-outline"></ion-icon>
-  </button><a href="${data}">Trailer Link</a>`;
+    this._modal.innerHTML = `
+    <button class="btn__close">
+      <ion-icon class="icon btn__close--icon" name="close-outline"></ion-icon>
+    </button>
+    <div class="modal__trailer--container">
+    <h1 class="heading__primary">Trailer</h1>
+    <div class="link__container">
+      <a href="${data}" target="_blank" class="trailer__link">Link para o trailer <ion-icon class="icon" name="arrow-forward-outline"></ion-icon></a>
+    </div>
+    </div>`;
     this.toggleModal();
   }
 
@@ -35,6 +42,10 @@ export default class moviesView {
   toggleModal() {
     this._modal.classList.toggle("hidden");
     this._overlay.classList.toggle("hidden");
+
+    document.body.style.overflow === "hidden"
+      ? (document.body.style.overflow = "auto")
+      : (document.body.style.overflow = "hidden");
   }
 
   render(data) {

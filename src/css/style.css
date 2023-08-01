@@ -30,7 +30,6 @@ html {
 body {
   color: #adb5bd;
   background-color: #1b1b1b;
-  height: 100vh;
 }
 
 .application__container {
@@ -294,7 +293,7 @@ body {
 
 /* Movie Modal */
 .modal {
-  height: 80vh;
+  height: 77rem;
   width: 60vw;
   top: 50%;
   left: 50%;
@@ -311,8 +310,8 @@ body {
 }
 
 .overlay {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   position: absolute;
   z-index: 99;
   background-color: rgba(19, 19, 19, 0.7);
@@ -410,4 +409,64 @@ body {
 .movie__modal--container .btn__trailer {
   padding: 1.6rem 0;
   margin: 0;
+}
+
+.modal__trailer--container {
+  padding: 1.6rem 2.4rem;
+}
+
+.modal__trailer {
+  height: 30rem;
+  width: 30vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 100;
+  background-color: #1b1b1b;
+}
+
+.link__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4.8rem;
+}
+
+.trailer__link:link,
+.trailer__link:visited {
+  text-decoration: none;
+  color: #bdc4ca;
+  font-size: 2rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0 auto;
+}
+.trailer__link:active,
+.trailer__link:hover {
+  color: #f76707;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 1.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  width: 1rem;
+  background: rgba(173, 181, 189, 0.1);
+  border-radius: 100px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(247, 103, 7, 0.1);
 }

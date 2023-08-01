@@ -12,10 +12,6 @@ class movieModalView {
     });
   }
 
-  #getId() {
-    return this.#data.movie.dataset.id;
-  }
-
   addHandlerAddToLists(handler) {
     this.#modal.addEventListener("click", function (e) {
       const btn = e.target.closest(".navigation__item");
@@ -47,6 +43,10 @@ class movieModalView {
   toggleModal() {
     this.#modal.classList.toggle("hidden");
     this.#overlay.classList.toggle("hidden");
+
+    document.body.style.overflow === "hidden"
+      ? (document.body.style.overflow = "auto")
+      : (document.body.style.overflow = "hidden");
   }
 
   #generateMarkup(movie) {
@@ -98,7 +98,6 @@ class movieModalView {
         <p>Sinopse:</p>
         </br>
         ${movie.overview}</div>
-        <button class="btn__trailer">Trailer</button>
         </div>
         </div>
     `;
