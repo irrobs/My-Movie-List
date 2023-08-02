@@ -24,11 +24,11 @@ Design choices:
 
 html {
   font-size: 62.5%;
-  font-family: sans-serif;
 }
 
 body {
   color: #adb5bd;
+  font-family: "Inter", sans-serif;
   background-color: #1b1b1b;
 }
 
@@ -41,6 +41,7 @@ body {
 /* Navigation */
 
 .navigation {
+  min-height: 100vh;
   font-size: 1.6rem;
 
   background-color: #131313;
@@ -469,4 +470,20 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(247, 103, 7, 0.1);
+}
+
+.about__description {
+  display: flex;
+  flex-direction: column;
+  max-width: 150rem;
+  margin: 4.8rem auto;
+  gap: 2.4rem;
+  font-size: 2rem;
+}
+
+.api__attribution {
+  font-size: 2.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
 }

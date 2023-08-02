@@ -12,21 +12,45 @@ import movieModalView from "./views/movieModalView.js";
 import favoriteView from "./views/favoriteView.js";
 import watchedView from "./views/watchedView.js";
 import laterView from "./views/laterView.js";
+import aboutView from "./views/aboutView.js";
 
 const controlTrailerPopular = async function (movieId) {
   await model.getTrailerData(movieId);
 
   popularView.renderModal(model.state.movieTrailer);
 };
+
 const controlTrailerTop = async function (movieId) {
   await model.getTrailerData(movieId);
 
   topMoviesView.renderModal(model.state.movieTrailer);
 };
+
 const controlTrailerCine = async function (movieId) {
   await model.getTrailerData(movieId);
 
   cinemaMoviesView.renderModal(model.state.movieTrailer);
+};
+
+const controlTrailerSearch = async function (movieId) {
+  await model.getTrailerData(movieId);
+
+  searchView.renderModal(model.state.movieTrailer);
+};
+const controlTrailerFavorite = async function (movieId) {
+  await model.getTrailerData(movieId);
+
+  favoriteView.renderModal(model.state.movieTrailer);
+};
+const controlTrailerLater = async function (movieId) {
+  await model.getTrailerData(movieId);
+
+  laterView.renderModal(model.state.movieTrailer);
+};
+const controlTrailerWatched = async function (movieId) {
+  await model.getTrailerData(movieId);
+
+  watchedView.renderModal(model.state.movieTrailer);
 };
 
 const controlAddToLists = function (btn, movieId) {
@@ -67,6 +91,10 @@ const controlAddToWatched = async function (movieId) {
 const controlLater = function () {
   laterView.render(model.state.laterMovies);
 };
+const controlAbout = function () {
+  aboutView.render();
+};
+
 const controlAddToLater = async function (movieId) {
   try {
     await model.addToLater(movieId);
@@ -88,7 +116,9 @@ const controlMovieModal = async function (movieID) {
 const controlCloseModal = function () {
   movieModalView.toggleModal();
 };
+
 const controlCloseTrailerModal = function () {
+  console.log("hi");
   popularView.toggleModal();
 };
 
@@ -225,8 +255,7 @@ const controlSearchPagination = async function (btn) {
     searchView.render(model.state.searchedMovies);
     searchPagination.render(model.state.searchedMovies);
 
-    const movies = document.querySelector(".movies");
-    movies.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   } catch (err) {
     console.error(err);
   }
@@ -240,15 +269,19 @@ const init = function () {
   popularView.addHandlerTrailer(controlTrailerPopular);
   topMoviesView.addHandlerTrailer(controlTrailerTop);
   cinemaMoviesView.addHandlerTrailer(controlTrailerCine);
+  searchView.addHandlerTrailer(controlTrailerSearch);
+  favoriteView.addHandlerTrailer(controlTrailerFavorite);
+  laterView.addHandlerTrailer(controlTrailerLater);
+  watchedView.addHandlerTrailer(controlTrailerWatched);
+
   popularView.addHandlerCloseModal(controlCloseTrailerModal);
-  topMoviesView.addHandlerCloseModal(controlCloseTrailerModal);
-  cinemaMoviesView.addHandlerCloseModal(controlCloseTrailerModal);
 
   navigationView.addHandlerHome(controlHome);
   popularPaginationView.addHandlerSlider(controlPopularSlider);
   topPaginationView.addHandlerSlider(controlTopSlider);
   cinemaPaginationView.addHandlerSlider(controlCinemaSlider);
   searchView.addHandlerSearch(controlSearch);
+
   searchPagination.addHandlerPagination(controlSearchPagination);
   movieModalView.addHandlerMovieModal(controlMovieModal);
   movieModalView.addHandlerCloseModal(controlCloseModal);
@@ -264,5 +297,7 @@ const init = function () {
 
   laterView.addHandlerLater(controlLater);
   laterView.addHandlerAddTolater(controlAddToLater);
+
+  aboutView.addHandlerAbout(controlAbout);
 };
 init();

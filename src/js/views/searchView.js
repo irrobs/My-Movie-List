@@ -4,7 +4,54 @@ class searchView {
   #searchedContainer = document.querySelector(".movies__searched");
   #moviesLists = document.querySelector(".lists__container");
   #movies = document.querySelector(".movies__searched--container");
+  #modal = document.querySelector(".modal__trailer");
+  #overlay = document.querySelector(".overlay");
   #data;
+
+  addHandlerTrailer(handler) {
+    this.#searchedContainer.addEventListener("click", function (e) {
+      if (!e.target.classList.contains("btn__trailer")) return;
+      const movieId = e.target.closest(".movie__preview").dataset.id;
+
+      handler(movieId);
+    });
+  }
+
+  addHandlerCloseModal(handler) {
+    this.#modal.addEventListener("click", function (e) {
+      if (!e.target.classList.contains("btn__close--icon")) return;
+      handler();
+    });
+  }
+
+  renderModal(data) {
+    this.#clearModal();
+    this.#modal.innerHTML = `
+    <button class="btn__close">
+      <ion-icon class="icon btn__close--icon" name="close-outline"></ion-icon>
+    </button>
+    <div class="modal__trailer--container">
+    <h1 class="heading__primary">Trailer</h1>
+    <div class="link__container">
+      <a href="${data}" target="_blank" class="trailer__link">Link para o trailer <ion-icon class="icon" name="arrow-forward-outline"></ion-icon></a>
+    </div>
+    </div>`;
+    this.toggleModal();
+  }
+
+  #clearModal() {
+    this.#modal.innerHTML = "";
+  }
+
+  toggleModal() {
+    this.#modal.classList.toggle("hidden");
+    this.#overlay.classList.toggle("hidden");
+    console.log("hi2");
+    window.scrollTo(0, 0);
+    document.body.style.overflow === "hidden"
+      ? (document.body.style.overflow = "auto")
+      : (document.body.style.overflow = "hidden");
+  }
 
   addHandlerSearch(handler) {
     this.#btnSearch.addEventListener("click", function () {

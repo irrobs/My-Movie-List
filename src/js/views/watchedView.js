@@ -1,5 +1,6 @@
-class watchedView {
-  #parentElement = document.querySelector(`.lists__container`);
+import movieListsView from "./movieListsView.js";
+
+class watchedView extends movieListsView {
   #moviesContainer = document.querySelector(".movies__sliders--container");
   #moviesSearched = document.querySelector(".movies__searched");
   #applicationContainer = document.querySelector(".application__container");
@@ -32,17 +33,17 @@ class watchedView {
       .join("");
 
     this.#clear();
-    this.#parentElement.innerHTML = `<h1 class="heading__primary">Assistidos</h1><div class='lists__description--container' >${markup}</div>`;
+    this._parentElement.innerHTML = `<h1 class="heading__primary">Assistidos</h1><div class='lists__description--container' >${markup}</div>`;
 
-    if (this.#parentElement.classList.contains("hidden")) {
+    if (this._parentElement.classList.contains("hidden")) {
       this.#moviesContainer.classList.add("hidden");
       this.#moviesSearched.classList.add("hidden");
-      this.#parentElement.classList.toggle("hidden");
+      this._parentElement.classList.toggle("hidden");
     }
   }
 
   #clear() {
-    this.#parentElement.innerHTML = "";
+    this._parentElement.innerHTML = "";
   }
 
   #getMoviePoster(movie) {

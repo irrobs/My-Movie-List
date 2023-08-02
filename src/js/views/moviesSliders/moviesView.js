@@ -32,6 +32,7 @@ export default class moviesView {
       <a href="${data}" target="_blank" class="trailer__link">Link para o trailer <ion-icon class="icon" name="arrow-forward-outline"></ion-icon></a>
     </div>
     </div>`;
+    this._parentElement.scrollTo(0, 0);
     this.toggleModal();
   }
 
@@ -43,6 +44,7 @@ export default class moviesView {
     this._modal.classList.toggle("hidden");
     this._overlay.classList.toggle("hidden");
 
+    window.scrollTo(0, 0);
     document.body.style.overflow === "hidden"
       ? (document.body.style.overflow = "auto")
       : (document.body.style.overflow = "hidden");

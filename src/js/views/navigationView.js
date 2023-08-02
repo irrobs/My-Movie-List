@@ -1,6 +1,5 @@
 class navigationView {
   #home = document.querySelector(".home");
-  #watched = document.querySelector(".watched");
   #later = document.querySelector(".later");
 
   addHandlerHome(handler) {
