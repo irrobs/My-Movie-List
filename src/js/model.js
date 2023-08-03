@@ -97,7 +97,6 @@ export const addToFavorite = async function (movieId) {
       "favoriteMovies",
       JSON.stringify(state.favoriteMovies)
     );
-    console.log(state.favoriteMovies);
   } catch (err) {
     console.error(err);
   }

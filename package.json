@@ -12,5 +12,9 @@
     "ionicons": "^7.1.2",
     "ionicons-npm": "^2.0.1",
     "parcel": "^2.9.3"
+  },
+  "devDependencies": {
+    "@parcel/packager-raw-url": "^2.9.3",
+    "@parcel/transformer-webmanifest": "^2.9.3"
   }
 }

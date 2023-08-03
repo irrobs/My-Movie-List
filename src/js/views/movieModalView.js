@@ -43,7 +43,7 @@ class movieModalView {
   toggleModal() {
     this.#modal.classList.toggle("hidden");
     this.#overlay.classList.toggle("hidden");
-
+    window.scrollTo(0, 0);
     document.body.style.overflow === "hidden"
       ? (document.body.style.overflow = "auto")
       : (document.body.style.overflow = "hidden");

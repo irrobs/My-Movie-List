@@ -118,7 +118,6 @@ const controlCloseModal = function () {
 };
 
 const controlCloseTrailerModal = function () {
-  console.log("hi");
   popularView.toggleModal();
 };
 
@@ -299,5 +298,7 @@ const init = function () {
   laterView.addHandlerAddTolater(controlAddToLater);
 
   aboutView.addHandlerAbout(controlAbout);
+
+  navigationView.addHandlerOpenMobileNav();
 };
 init();

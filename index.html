@@ -4,6 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Movie List</title>
+    <meta
+      name="description"
+      content="Explore por filme de todo o mundo em My Movie List! Avalie, acompanhe e descubra os melhores filmes de todos os gêneros. Encontre informações detalhadas, críticas da comunidade e crie sua lista pessoal de filmes favoritos, filmes assistidos ou para assistir mais tarde."
+    />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,6 +23,7 @@
 
     <link rel="stylesheet" href="./src/css/style.css" />
     <link rel="stylesheet" href="./src/css/general.css" />
+    <link rel="stylesheet" href="./src/css/queries.css" />
 
     <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
 
@@ -21,9 +31,13 @@
   </head>
   <body>
     <div class="application__container">
+      <button class="btn-mobile-nav">
+        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+      </button>
       <aside class="navigation">
         <div class="logo">
-          <ion-icon class="logo__icon" name="videocam"></ion-icon>
+          <!-- <ion-icon class="logo__icon" name="videocam"></ion-icon> -->
           <p>My Movie List</p>
         </div>
         <nav class="navigation__container">
@@ -59,7 +73,7 @@
             type="text"
             placeholder="Digite o nome do filme"
           />
-          <button class="btn__search">
+          <button class="btn__search" aria-label="Busca">
             <ion-icon class="icon" name="search-outline"></ion-icon>
           </button>
         </div>

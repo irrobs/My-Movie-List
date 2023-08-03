@@ -6,7 +6,6 @@ export default class movieListsView {
 
   addHandlerTrailer(handler) {
     this._parentElement.addEventListener("click", function (e) {
-      console.log("hi");
       if (!e.target.classList.contains("btn__trailer")) return;
       const movieId = e.target.closest(".movie__preview").dataset.id;
 

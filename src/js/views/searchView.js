@@ -27,7 +27,7 @@ class searchView {
   renderModal(data) {
     this.#clearModal();
     this.#modal.innerHTML = `
-    <button class="btn__close">
+    <button class="btn__close" aria-label="Fechar Modal">
       <ion-icon class="icon btn__close--icon" name="close-outline"></ion-icon>
     </button>
     <div class="modal__trailer--container">
@@ -46,7 +46,6 @@ class searchView {
   toggleModal() {
     this.#modal.classList.toggle("hidden");
     this.#overlay.classList.toggle("hidden");
-    console.log("hi2");
     window.scrollTo(0, 0);
     document.body.style.overflow === "hidden"
       ? (document.body.style.overflow = "auto")
@@ -85,13 +84,6 @@ class searchView {
   #clear() {
     this.#movies.innerHTML = "";
   }
-
-  #getMoviePoster(movie) {
-    return movie.poster_path
-      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-      : "";
-  }
-
   #generateMarkup = function (movie) {
     return `
     <div class="movie__preview" data-id="${movie.id}" >
