@@ -15,42 +15,70 @@ import laterView from "./views/laterView.js";
 import aboutView from "./views/aboutView.js";
 
 const controlTrailerPopular = async function (movieId) {
-  await model.getTrailerData(movieId);
+  try {
+    await model.getTrailerData(movieId);
 
-  popularView.renderModal(model.state.movieTrailer);
+    popularView.renderModal(model.state.movieTrailer);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const controlTrailerTop = async function (movieId) {
-  await model.getTrailerData(movieId);
+  try {
+    await model.getTrailerData(movieId);
 
-  topMoviesView.renderModal(model.state.movieTrailer);
+    topMoviesView.renderModal(model.state.movieTrailer);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const controlTrailerCine = async function (movieId) {
-  await model.getTrailerData(movieId);
+  try {
+    await model.getTrailerData(movieId);
 
-  cinemaMoviesView.renderModal(model.state.movieTrailer);
+    cinemaMoviesView.renderModal(model.state.movieTrailer);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const controlTrailerSearch = async function (movieId) {
-  await model.getTrailerData(movieId);
+  try {
+    await model.getTrailerData(movieId);
 
-  searchView.renderModal(model.state.movieTrailer);
+    searchView.renderModal(model.state.movieTrailer);
+  } catch (error) {
+    console.error(error);
+  }
 };
 const controlTrailerFavorite = async function (movieId) {
-  await model.getTrailerData(movieId);
+  try {
+    await model.getTrailerData(movieId);
 
-  favoriteView.renderModal(model.state.movieTrailer);
+    favoriteView.renderModal(model.state.movieTrailer);
+  } catch (error) {
+    console.error(error);
+  }
 };
 const controlTrailerLater = async function (movieId) {
-  await model.getTrailerData(movieId);
+  try {
+    await model.getTrailerData(movieId);
 
-  laterView.renderModal(model.state.movieTrailer);
+    laterView.renderModal(model.state.movieTrailer);
+  } catch (error) {
+    console.error(error);
+  }
 };
 const controlTrailerWatched = async function (movieId) {
-  await model.getTrailerData(movieId);
+  try {
+    await model.getTrailerData(movieId);
 
-  watchedView.renderModal(model.state.movieTrailer);
+    watchedView.renderModal(model.state.movieTrailer);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const controlAddToLists = function (btn, movieId) {
